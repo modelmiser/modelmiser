@@ -10,7 +10,7 @@
 
 | Repo | Description |
 |------|-------------|
-| [warp-types](https://github.com/modelmiser/warp-types) | Session-typed GPU warp divergence |
+| [warp-types](https://github.com/modelmiser/warp-types) | Linear typestate for GPU warp divergence — compile-time prevention of shuffle bugs |
 
 ## Forks
 
