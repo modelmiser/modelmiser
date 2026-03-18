@@ -10,4 +10,4 @@
 
 | Repo | Description |
 |------|-------------|
-| [warp-types](https://github.com/modelmiser/warp-types) | Linear typestate for GPU warp divergence — compile-time prevention of shuffle bugs |
+| [warp-types](https://github.com/modelmiser/warp-types) | Linear typestate for GPU warp divergence — compile-time prevention of shuffle-from-inactive-lane bugs |
