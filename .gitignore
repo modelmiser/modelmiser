@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+INSIGHTS.md
+DEVLOG.md
+TODO.md
