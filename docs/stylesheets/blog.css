@@ -223,11 +223,12 @@
   --md-typeset-a-color: #58a6ff;
 }
 
-/* Mermaid in dark mode — light diagram on subtle background */
+/* Mermaid in dark mode — desaturated steel blue (complement of amber accent) */
 [data-md-color-scheme="slate"] .mermaid {
-  background: #161b22;
+  background: #1a2a3a;
   border-radius: 6px;
   padding: 1rem;
+  border-top: 2px solid var(--mm-amber-dim);
   filter: invert(0.88) hue-rotate(180deg);
 }
 
