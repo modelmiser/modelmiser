@@ -26,8 +26,8 @@ Recent posts from the [blog](blog/index.md):
 
 | Project | What it is |
 |---------|-----------|
-| [warp-core](projects/warp-core.md) | Soft GPU on ECP5 — 4-warp SIMT with virtual peripherals |
-| [warp-types](projects/warp-types.md) | Linear typestate for GPU divergence — compile-time shuffle safety |
+| [warp-core](research/warp-core.md) | Soft GPU on ECP5 — 4-warp SIMT with virtual peripherals |
+| [warp-types](research/warp-types.md) | Linear typestate for GPU divergence — compile-time shuffle safety |
 
 ## Elsewhere
 

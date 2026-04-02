@@ -92,6 +92,6 @@ nav:
     - mm-warp: software/mm-warp.md
     - mm-dream: software/mm-dream.md
   - Research:
-    - projects/index.md
-    - warp-core: projects/warp-core.md
-    - warp-types: projects/warp-types.md
+    - research/index.md
+    - warp-core: research/warp-core.md
+    - warp-types: research/warp-types.md

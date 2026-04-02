@@ -1,5 +1,5 @@
 ---
-date: 2026-04-02
+date: 2026-03-19
 ---
 
 # Why the Kaleidoscope Looks Symmetric When It Isn't

@@ -223,10 +223,12 @@
   --md-typeset-a-color: #58a6ff;
 }
 
-/* Mermaid in dark mode — transparent bg, light text */
+/* Mermaid in dark mode — light diagram on subtle background */
 [data-md-color-scheme="slate"] .mermaid {
-  filter: invert(0.85) hue-rotate(180deg);
-  opacity: 0.92;
+  background: #161b22;
+  border-radius: 6px;
+  padding: 1rem;
+  filter: invert(0.88) hue-rotate(180deg);
 }
 
 /* --------------------------------------------------------------------------

@@ -12,11 +12,13 @@
         <meta name="author" content="ModelMiser">
       
       
-        <link rel="canonical" href="https://modelmiser.com/projects/warp-types/">
+        <link rel="canonical" href="https://modelmiser.com/research/warp-core/">
       
       
-        <link rel="prev" href="../warp-core/">
+        <link rel="prev" href="../">
       
+      
+        <link rel="next" href="../warp-types/">
       
       
         
@@ -27,7 +29,7 @@
     
     
       
-        <title>warp-types - ModelMiser</title>
+        <title>warp-core - ModelMiser</title>
       
     
     
@@ -74,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#warp-types" class="md-skip">
+        <a href="#warp-core" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              warp-types
+              warp-core
             
           </span>
         </div>
@@ -670,34 +672,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../warp-core/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    warp-core
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -717,7 +691,7 @@
   <span class="md-ellipsis">
     
   
-    warp-types
+    warp-core
   
 
     
@@ -735,7 +709,7 @@
   <span class="md-ellipsis">
     
   
-    warp-types
+    warp-core
   
 
     
@@ -782,21 +756,38 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#links" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Links
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../warp-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    warp-types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -857,17 +848,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#links" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Links
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -885,25 +865,21 @@
 
 
 
-<h1 id="warp-types">warp-types<a class="headerlink" href="#warp-types" title="Permanent link">&para;</a></h1>
-<p>Linear typestate for GPU warp divergence: compile-time prevention of
-shuffle-from-inactive-lane bugs.</p>
-<p><strong>Status:</strong> v0.3.1 on crates.io</p>
-<p><strong>Repository:</strong> <a href="https://github.com/modelmiser/warp-types">github.com/modelmiser/warp-types</a></p>
+<h1 id="warp-core">warp-core<a class="headerlink" href="#warp-core" title="Permanent link">&para;</a></h1>
+<p>A soft GPU on the ECP5-85F FPGA: 4-warp, 8-lane SIMT with cooperative scheduling,
+auto-diverging branches, and runtime-loadable virtual peripherals.</p>
+<p><strong>Status:</strong> ISA v0.5.2 spec complete (95 instructions, 29 CSRs). RTL migration in progress.</p>
+<p><strong>Repository:</strong> <a href="https://github.com/modelmiser/warp-core">github.com/modelmiser/warp-core</a> (not yet public)</p>
 <h2 id="what-it-is">What it is<a class="headerlink" href="#what-it-is" title="Permanent link">&para;</a></h2>
-<p>A Rust type system that makes GPU divergence bugs into compile errors. When a
-warp diverges (some lanes take one branch, others take the other), shuffles and
-reductions become unsafe — reading from an inactive lane is undefined behavior.
-warp-types encodes the divergence state in the type system so the compiler
-rejects these bugs before they reach the GPU.</p>
+<p>A processor you can understand end-to-end on a single FPGA board. Four independent SIMT
+pipelines, each running 8 lanes, with a hardware divergence stack, lane shuffles,
+reductions, and inter-warp channels. HDMI output for immediate visible results.</p>
+<p>Each warp can run a different <em>personality</em> — a piece of microcode that acts as a
+virtual peripheral (display renderer, audio synthesizer, sensor poller, protocol
+bridge). A RISC-V kernel dispatches and manages warp lifecycles from Rust firmware.</p>
 <h2 id="blog-posts">Blog posts<a class="headerlink" href="#blog-posts" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="../../blog/2026/04/02/a-fourth-point-in-the-simt-divergence-design-space/">A Fourth Point in the SIMT Divergence Design Space</a> — warp-core's auto-diverge model grew out of warp-types</li>
-</ul>
-<h2 id="links">Links<a class="headerlink" href="#links" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://crates.io/crates/warp-types">crates.io/crates/warp-types</a></li>
-<li><a href="https://doi.org/10.5281/zenodo.19040615">Concept DOI: 10.5281/zenodo.19040615</a></li>
+<li><a href="../../blog/2026/04/02/a-fourth-point-in-the-simt-divergence-design-space/">A Fourth Point in the SIMT Divergence Design Space</a></li>
 </ul>
 
 

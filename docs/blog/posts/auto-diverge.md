@@ -47,7 +47,7 @@ It isn't.
 
 Warp-core is a soft GPU I'm building on an ECP5-85F FPGA — 4 independent
 SIMT pipelines, 8 lanes each, targeting the ULX3S board. It grew out of
-[warp-types](../../projects/warp-types.md), a Rust library that
+[warp-types](../../research/warp-types.md), a Rust library that
 encodes GPU divergence state in the type system. Formalizing what
 divergence *means* — which lanes are active, what operations are safe,
 how convergence is guaranteed — turned out to be the right preparation
@@ -233,6 +233,6 @@ Nobody else offers this on a hobbyist FPGA board.
 
 ---
 
-🦬☀️ *[Warp-core](../../projects/warp-core.md) is an open-source soft GPU targeting the ULX3S (ECP5-85F).
+🦬☀️ *[Warp-core](../../research/warp-core.md) is an open-source soft GPU targeting the ULX3S (ECP5-85F).
 ISA v0.5.2 spec is complete; RTL migration is in progress.
 [GitHub](https://github.com/modelmiser/warp-core) (not yet public).*
