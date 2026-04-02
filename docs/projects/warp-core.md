@@ -9,7 +9,7 @@ auto-diverging branches, and runtime-loadable virtual peripherals.
 
 ## What it is
 
-A processor you can understand end-to-end on a $50 board. Four independent SIMT
+A processor you can understand end-to-end on a single FPGA board. Four independent SIMT
 pipelines, each running 8 lanes, with a hardware divergence stack, lane shuffles,
 reductions, and inter-warp channels. HDMI output for immediate visible results.
 

@@ -4,7 +4,7 @@ date: 2026-04-02
 
 # A Fourth Point in the SIMT Divergence Design Space
 
-How a soft GPU on a $50 FPGA found a divergence model the industry skipped.
+A divergence model the industry skipped, from type theory to silicon.
 
 <!-- more -->
 
@@ -46,9 +46,16 @@ It isn't.
 ## Auto-diverging branches
 
 Warp-core is a soft GPU I'm building on an ECP5-85F FPGA — 4 independent
-SIMT pipelines, 8 lanes each, targeting a $50 ULX3S board. The ISA went
-through five iterations in a week (v0.1 through v0.5.2), and during v0.3 the
-divergence model landed on a fourth point in the design space.
+SIMT pipelines, 8 lanes each, targeting the ULX3S board. It grew out of
+[warp-types](https://crates.io/crates/warp-types), a Rust library that
+encodes GPU divergence state in the type system. Formalizing what
+divergence *means* — which lanes are active, what operations are safe,
+how convergence is guaranteed — turned out to be the right preparation
+for designing hardware that handles divergence differently.
+
+The ISA went through five iterations in a week (v0.1 through v0.5.2),
+and during v0.3 the divergence model landed on a fourth point in the
+design space.
 
 The idea: **every conditional branch auto-diverges.** The hardware evaluates
 the branch condition on all active lanes simultaneously, then:
@@ -94,7 +101,7 @@ to do anything special. It emits branches. The hardware handles divergence.
 
 There's a catch. Consider a loop where lanes exit gradually:
 
-```
+```c
 while (lane_data[lane_id] > threshold) {
     // ... some work ...
     threshold += step;
@@ -117,7 +124,7 @@ current PC, the hardware recognizes a loop re-entry. Instead of pushing a new
 entry, it accumulates the exiting lanes into the existing entry's pending
 mask and shrinks the active mask.
 
-```
+```text
 Iteration 1:  active = 11111111  → diverges, push entry (source_pc = 0x42)
 Iteration 2:  active = 01111111  → source_pc match → update in place
 Iteration 3:  active = 00111111  → source_pc match → update in place
@@ -222,7 +229,7 @@ entire divergence model in their head at once — the stack entry format, the
 phase flag, the source_pc matching, all of it — and understand exactly what
 happens on every branch, in every lane, on every cycle.
 
-Nobody else offers this on a $50 board.
+Nobody else offers this on a hobbyist FPGA board.
 
 ---
 

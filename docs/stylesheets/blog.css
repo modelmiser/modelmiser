@@ -4,6 +4,15 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
+   Font stack — Segoe UI with sensible fallbacks
+   -------------------------------------------------------------------------- */
+
+:root {
+  --md-text-font: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --md-code-font: "Cascadia Code", "JetBrains Mono", "Fira Code", monospace;
+}
+
+/* --------------------------------------------------------------------------
    Content width — narrower than docs default for readability
    Optimal line length: 60-75 characters
    -------------------------------------------------------------------------- */
@@ -23,8 +32,8 @@
    -------------------------------------------------------------------------- */
 
 .md-typeset {
-  font-size: 1.05rem;         /* Slightly larger than Material default */
-  line-height: 1.78;          /* Generous — key for long-form readability */
+  font-size: 0.85rem;         /* Tighter than Material default */
+  line-height: 1.7;
 }
 
 /* Headings: tighter, more contrast */
@@ -91,7 +100,7 @@
 
 /* Assembly and Verilog get a bit more room */
 .md-typeset pre code {
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   line-height: 1.5;
 }
 

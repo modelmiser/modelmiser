@@ -1,3 +1,7 @@
+<div style="text-align: center; margin: 2rem 0 1rem;">
+  <img src="assets/logo.jpeg" alt="ModelMiser" style="max-width: 320px; border-radius: 8px;">
+</div>
+
 # ModelMiser
 
 Hardware architecture, type theory, and the spaces between.
@@ -8,9 +12,9 @@ Hardware architecture, type theory, and the spaces between.
 
 Recent posts from the [blog](blog/index.md):
 
-- **A Fourth Point in the SIMT Divergence Design Space** — auto-diverging branches on a $50 FPGA
+- **A Fourth Point in the SIMT Divergence Design Space** — auto-diverging branches on a hobbyist FPGA
 
-## Projects
+## Research
 
 | Project | What it is |
 |---------|-----------|

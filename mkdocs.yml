@@ -25,9 +25,9 @@ theme:
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
-  font:
-    text: Source Serif 4
-    code: JetBrains Mono
+  logo: assets/logo.jpeg
+  favicon: assets/logo.jpeg
+  font: false
 
 plugins:
   - search
@@ -87,7 +87,7 @@ nav:
   - Home: index.md
   - Blog:
     - blog/index.md
-  - Projects:
+  - Research:
     - projects/index.md
     - Warp-Core: projects/warp-core.md
     - Warp-Types: projects/warp-types.md
