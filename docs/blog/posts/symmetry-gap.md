@@ -148,5 +148,5 @@ was there.
 
 ---
 
-*mm-dream is a GPU-accelerated kaleidoscope screensaver built with WGSL
+🦬☀️ *mm-dream is a GPU-accelerated kaleidoscope screensaver built with WGSL
 and libcosmic. [GitHub](https://github.com/modelmiser/mm-dream).*
