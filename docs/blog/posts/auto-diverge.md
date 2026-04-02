@@ -233,6 +233,6 @@ Nobody else offers this on a hobbyist FPGA board.
 
 ---
 
-🦬☀️ *[Warp-core](../../research/warp-core.md) is an open-source soft GPU targeting the ULX3S (ECP5-85F).
+🦬☀️ *[warp-core](../../research/warp-core.md) is an open-source soft GPU targeting the ULX3S (ECP5-85F).
 ISA v0.5.2 spec is complete; RTL migration is in progress.
 [GitHub](https://github.com/modelmiser/warp-core) (not yet public).*
