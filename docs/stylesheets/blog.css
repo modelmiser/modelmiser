@@ -306,7 +306,7 @@
 
 .md-typeset hr {
   border: none;
-  height: 1px;
+  height: 2px;
   background: linear-gradient(to right, var(--mm-amber), transparent);
   margin: 2rem 0;
 }
