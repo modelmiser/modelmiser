@@ -8,7 +8,6 @@ theme:
   custom_dir: overrides
   features:
     - navigation.tabs
-    - navigation.sections
     - navigation.top
     - content.code.copy
     - content.code.annotate
