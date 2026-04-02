@@ -38,18 +38,6 @@
 /* Let the grid still use full width for nav structure */
 .md-main__inner {
   max-width: 72rem;
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.md-container {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.md-grid {
-  max-width: 100%;
-  margin: 0;
 }
 
 /* --------------------------------------------------------------------------
