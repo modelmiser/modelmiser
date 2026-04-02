@@ -223,13 +223,46 @@
   --md-typeset-a-color: #58a6ff;
 }
 
-/* Mermaid in dark mode — desaturated steel blue (complement of amber accent) */
+/* Mermaid in dark mode — no filter, override mermaid colors via CSS */
 [data-md-color-scheme="slate"] .mermaid {
-  background: #1a2a3a;
+  background: #131d2a;
   border-radius: 6px;
   padding: 1rem;
   border-top: 2px solid var(--mm-amber-dim);
-  filter: invert(0.88) hue-rotate(180deg);
+}
+
+[data-md-color-scheme="slate"] .mermaid .node rect,
+[data-md-color-scheme="slate"] .mermaid .node polygon,
+[data-md-color-scheme="slate"] .mermaid .node circle {
+  fill: #1a2a3a !important;
+  stroke: #58a6ff !important;
+}
+
+[data-md-color-scheme="slate"] .mermaid .nodeLabel,
+[data-md-color-scheme="slate"] .mermaid text,
+[data-md-color-scheme="slate"] .mermaid .label text,
+[data-md-color-scheme="slate"] .mermaid span {
+  color: #e6edf3 !important;
+  fill: #e6edf3 !important;
+}
+
+[data-md-color-scheme="slate"] .mermaid .edgePath path,
+[data-md-color-scheme="slate"] .mermaid .flowchart-link {
+  stroke: #58a6ff !important;
+}
+
+[data-md-color-scheme="slate"] .mermaid marker path {
+  fill: #58a6ff !important;
+  stroke: #58a6ff !important;
+}
+
+[data-md-color-scheme="slate"] .mermaid .edgeLabel {
+  background: #131d2a !important;
+  color: #8d96a0 !important;
+}
+
+[data-md-color-scheme="slate"] .mermaid .edgeLabel span {
+  color: #8d96a0 !important;
 }
 
 /* --------------------------------------------------------------------------
