@@ -12,8 +12,8 @@ Hardware architecture, type theory, and the spaces between.
 
 Recent posts from the [blog](blog/index.md):
 
-- **Why the Kaleidoscope Looks Symmetric When It Isn't** — scale-space filtration and the gap between math and perception
-- **A Fourth Point in the SIMT Divergence Design Space** — auto-diverging branches on a hobbyist FPGA
+- [**Why the Kaleidoscope Looks Symmetric When It Isn't**](blog/posts/symmetry-gap.md) — scale-space filtration and the gap between math and perception
+- [**A Fourth Point in the SIMT Divergence Design Space**](blog/posts/auto-diverge.md) — auto-diverging branches on a hobbyist FPGA
 
 ## Software
 
@@ -27,7 +27,7 @@ Recent posts from the [blog](blog/index.md):
 | Project | What it is |
 |---------|-----------|
 | [warp-core](projects/warp-core.md) | Soft GPU on ECP5 — 4-warp SIMT with virtual peripherals |
-| [warp-types](projects/warp-types.md) | Session-typed GPU divergence — compile-time shuffle safety |
+| [warp-types](projects/warp-types.md) | Linear typestate for GPU divergence — compile-time shuffle safety |
 
 ## Elsewhere
 

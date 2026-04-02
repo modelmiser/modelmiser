@@ -15,6 +15,10 @@ reductions become unsafe — reading from an inactive lane is undefined behavior
 warp-types encodes the divergence state in the type system so the compiler
 rejects these bugs before they reach the GPU.
 
+## Blog posts
+
+- [A Fourth Point in the SIMT Divergence Design Space](../blog/posts/auto-diverge.md) — warp-core's auto-diverge model grew out of warp-types
+
 ## Links
 
 - [crates.io/crates/warp-types](https://crates.io/crates/warp-types)

@@ -2,6 +2,8 @@
 
 GPU-accelerated kaleidoscope screensaver built with WGSL and libcosmic.
 
+**Status:** Published on GitHub
+
 **Repository:** [github.com/modelmiser/mm-dream](https://github.com/modelmiser/mm-dream)
 
 ## What it is

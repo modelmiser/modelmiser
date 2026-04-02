@@ -494,7 +494,7 @@ complexity. The design space looks fully explored.</p>
 <h2 id="auto-diverging-branches">Auto-diverging branches<a class="headerlink" href="#auto-diverging-branches" title="Permanent link">¶</a></h2>
 <p>Warp-core is a soft GPU I'm building on an ECP5-85F FPGA — 4 independent
 SIMT pipelines, 8 lanes each, targeting the ULX3S board. It grew out of
-<a href="https://crates.io/crates/warp-types">warp-types</a>, a Rust library that
+<a href="../../../../../projects/warp-types/">warp-types</a>, a Rust library that
 encodes GPU divergence state in the type system. Formalizing what
 divergence <em>means</em> — which lanes are active, what operations are safe,
 how convergence is guaranteed — turned out to be the right preparation
@@ -696,7 +696,7 @@ phase flag, the source_pc matching, all of it — and understand exactly what
 happens on every branch, in every lane, on every cycle.</p>
 <p>Nobody else offers this on a hobbyist FPGA board.</p>
 <hr/>
-<p>🦬☀️ <em>Warp-core is an open-source soft GPU targeting the ULX3S (ECP5-85F).
+<p>🦬☀️ <em><a href="../../../../../projects/warp-core/">Warp-core</a> is an open-source soft GPU targeting the ULX3S (ECP5-85F).
 ISA v0.5.2 spec is complete; RTL migration is in progress.
 <a href="https://github.com/modelmiser/warp-core">GitHub</a> (not yet public).</em></p>
 </article>
