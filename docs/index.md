@@ -14,6 +14,13 @@ Recent posts from the [blog](blog/index.md):
 
 - **A Fourth Point in the SIMT Divergence Design Space** — auto-diverging branches on a hobbyist FPGA
 
+## Software
+
+| Project | What it is |
+|---------|-----------|
+| [mm-warp](https://github.com/modelmiser/mm-warp) | Native Wayland remote desktop for COSMIC — 4K H.264 streaming |
+| [mm-dream](software/mm-dream.md) | GPU-accelerated kaleidoscope screensaver — WGSL + libcosmic |
+
 ## Research
 
 | Project | What it is |

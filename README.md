@@ -7,6 +7,7 @@
 | Repo | Description |
 |------|-------------|
 | [mm-warp](https://github.com/modelmiser/mm-warp) | Native Wayland remote desktop for COSMIC — 4K H.264 streaming with keyboard/mouse control |
+| [mm-dream](https://github.com/modelmiser/mm-dream) | GPU-accelerated kaleidoscope screensaver — WGSL + libcosmic |
 
 ## Research
 
