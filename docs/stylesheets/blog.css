@@ -20,7 +20,7 @@
    Sidebar — hide redundant section title (already shown in tabs)
    -------------------------------------------------------------------------- */
 
-.md-sidebar .md-nav--primary > .md-nav__title {
+.md-sidebar .md-nav__title {
   display: none;
 }
 
