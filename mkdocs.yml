@@ -8,7 +8,6 @@ theme:
   custom_dir: overrides
   features:
     - navigation.tabs
-    - navigation.indexes
     - navigation.top
     - content.code.copy
     - content.code.annotate
@@ -87,10 +86,8 @@ nav:
   - Blog:
     - blog/index.md
   - Software:
-    - software/index.md
     - mm-warp: software/mm-warp.md
     - mm-dream: software/mm-dream.md
   - Research:
-    - research/index.md
     - warp-core: research/warp-core.md
     - warp-types: research/warp-types.md
