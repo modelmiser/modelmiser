@@ -1,0 +1,93 @@
+site_name: ModelMiser
+site_url: https://modelmiser.com
+site_description: Hardware architecture, type theory, and the spaces between
+site_author: ModelMiser
+
+theme:
+  name: material
+  custom_dir: overrides
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - content.code.annotate
+  palette:
+    - scheme: slate
+      primary: black
+      accent: deep purple
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - scheme: default
+      primary: white
+      accent: deep purple
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+  font:
+    text: Source Serif 4
+    code: JetBrains Mono
+
+plugins:
+  - search
+  - blog:
+      blog_dir: blog
+      post_date_format: long
+      post_excerpt: required
+      archive: false
+      categories: false
+  - mermaid2:
+      arguments:
+        theme: base
+        themeVariables:
+          primaryColor: '#e8eaf6'
+          primaryTextColor: '#1a1a1a'
+          primaryBorderColor: '#5c6bc0'
+          lineColor: '#5c6bc0'
+          secondaryColor: '#e8f5e9'
+          tertiaryColor: '#fff3e0'
+          background: '#ffffff'
+          mainBkg: '#e8eaf6'
+          nodeBkg: '#e8eaf6'
+          nodeBorder: '#5c6bc0'
+          clusterBkg: '#f3e5f5'
+          clusterBorder: '#7b1fa2'
+          titleColor: '#1a1a1a'
+          edgeLabelBackground: '#ffffff'
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.details
+  - pymdownx.arithmatex:
+      generic: true
+  - admonition
+  - tables
+  - footnotes
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+extra_css:
+  - stylesheets/blog.css
+
+extra_javascript:
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Home: index.md
+  - Blog:
+    - blog/index.md
+  - Projects:
+    - projects/index.md
+    - Warp-Core: projects/warp-core.md
+    - Warp-Types: projects/warp-types.md

@@ -1,0 +1,212 @@
+/* ==========================================================================
+   ModelMiser Blog — Typography and Layout
+   Optimized for long-form reading, not documentation.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Content width — narrower than docs default for readability
+   Optimal line length: 60-75 characters
+   -------------------------------------------------------------------------- */
+
+.md-content {
+  max-width: 48rem;           /* ~768px — comfortable reading width */
+  margin: 0 auto;
+}
+
+/* Let the grid still use full width for nav structure */
+.md-main__inner {
+  max-width: 72rem;
+}
+
+/* --------------------------------------------------------------------------
+   Typography — tuned for reading, not scanning
+   -------------------------------------------------------------------------- */
+
+.md-typeset {
+  font-size: 1.05rem;         /* Slightly larger than Material default */
+  line-height: 1.78;          /* Generous — key for long-form readability */
+}
+
+/* Headings: tighter, more contrast */
+.md-typeset h1 {
+  font-weight: 700;
+  font-size: 2.2rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.md-typeset h2 {
+  font-weight: 600;
+  font-size: 1.6rem;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset h3 {
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Paragraphs: more breathing room */
+.md-typeset p {
+  margin-bottom: 1.3rem;
+}
+
+/* Block quotes: styled as callouts, not indented mush */
+.md-typeset blockquote {
+  border-left: 3px solid var(--md-accent-fg-color);
+  padding: 0.5rem 1.2rem;
+  margin: 1.5rem 0;
+  background: var(--md-code-bg-color);
+  border-radius: 0 4px 4px 0;
+}
+
+.md-typeset blockquote p {
+  margin-bottom: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Code blocks — slightly softer than docs
+   -------------------------------------------------------------------------- */
+
+.md-typeset code {
+  font-size: 0.88em;
+  padding: 0.15em 0.35em;
+  border-radius: 3px;
+}
+
+.md-typeset pre {
+  margin: 1.5rem 0;
+  border-radius: 6px;
+}
+
+/* Assembly and Verilog get a bit more room */
+.md-typeset pre code {
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   Blog post metadata
+   -------------------------------------------------------------------------- */
+
+.md-post__meta {
+  font-family: var(--md-text-font-family);
+  color: var(--md-default-fg-color--light);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+/* --------------------------------------------------------------------------
+   Mermaid diagrams — centered, breathing room
+   -------------------------------------------------------------------------- */
+
+.mermaid {
+  font-family: var(--md-text-font-family, sans-serif) !important;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.mermaid text {
+  font-family: var(--md-text-font-family, sans-serif) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Tables — cleaner for blog context
+   -------------------------------------------------------------------------- */
+
+.md-typeset table {
+  font-size: 0.9rem;
+  margin: 1.5rem 0;
+}
+
+.md-typeset table th {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Footnotes — subtle
+   -------------------------------------------------------------------------- */
+
+.md-typeset .footnote {
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   Dark mode — true black, comfortable contrast
+   -------------------------------------------------------------------------- */
+
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: #0a0a0a;
+  --md-default-bg-color--light: #111111;
+  --md-default-bg-color--lighter: #1a1a1a;
+  --md-default-bg-color--lightest: #222222;
+  --md-code-bg-color: #111111;
+  --md-footer-bg-color: #0a0a0a;
+  --md-footer-bg-color--dark: #050505;
+}
+
+[data-md-color-scheme="slate"] .md-typeset {
+  --md-default-fg-color: #d4d4d4;     /* Not pure white — easier on eyes */
+}
+
+/* Mermaid in dark mode */
+[data-md-color-scheme="slate"] .mermaid {
+  filter: invert(0.88) hue-rotate(180deg);
+}
+
+/* --------------------------------------------------------------------------
+   Hide right-side TOC on blog posts — it's for docs, not essays
+   Blog posts use the scroll, not the sidebar
+   -------------------------------------------------------------------------- */
+
+.md-sidebar--secondary {
+  display: none;
+}
+
+/* Reclaim the space */
+.md-content {
+  margin-right: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Blog index — post cards with excerpts
+   -------------------------------------------------------------------------- */
+
+.md-post {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-post:last-child {
+  border-bottom: none;
+}
+
+/* --------------------------------------------------------------------------
+   Print — clean, no chrome
+   -------------------------------------------------------------------------- */
+
+@media print {
+  .md-sidebar,
+  .md-header,
+  .md-footer,
+  .md-tabs {
+    display: none !important;
+  }
+
+  .md-content {
+    max-width: 100%;
+  }
+}

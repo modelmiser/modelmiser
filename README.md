@@ -1,5 +1,7 @@
 # modelmiser
 
+[modelmiser.com](https://modelmiser.com) — hardware architecture, type theory, and the spaces between.
+
 ## Software
 
 | Repo | Description |
