@@ -89,5 +89,5 @@ nav:
     - blog/index.md
   - Research:
     - projects/index.md
-    - Warp-Core: projects/warp-core.md
-    - Warp-Types: projects/warp-types.md
+    - warp-core: projects/warp-core.md
+    - warp-types: projects/warp-types.md
