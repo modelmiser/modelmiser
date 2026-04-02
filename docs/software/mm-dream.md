@@ -16,3 +16,7 @@ Features:
 - Zoom state machine with smoothstep-eased transitions
 - CRT post-processing (barrel distortion, scanlines, phosphor grille, vignette)
 - Auto-cycling through pattern combinations
+
+## Blog posts
+
+- [Why the Kaleidoscope Looks Symmetric When It Isn't](../blog/posts/symmetry-gap.md)

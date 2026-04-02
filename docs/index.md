@@ -19,7 +19,7 @@ Recent posts from the [blog](blog/index.md):
 
 | Project | What it is |
 |---------|-----------|
-| [mm-warp](https://github.com/modelmiser/mm-warp) | Native Wayland remote desktop for COSMIC — 4K H.264 streaming |
+| [mm-warp](software/mm-warp.md) | Native Wayland remote desktop for COSMIC — 4K H.264 streaming |
 | [mm-dream](software/mm-dream.md) | GPU-accelerated kaleidoscope screensaver — WGSL + libcosmic |
 
 ## Research
