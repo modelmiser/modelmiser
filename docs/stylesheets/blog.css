@@ -154,6 +154,8 @@
   font-family: var(--md-text-font-family, sans-serif) !important;
   margin: 2rem auto;
   text-align: center;
+  border-radius: 6px;
+  padding: 1rem;
 }
 
 .mermaid text {
@@ -201,6 +203,24 @@
   --md-default-fg-color--lightest: #d1d9e0;
   --md-accent-fg-color: #0969da;
   --md-typeset-a-color: #0969da;
+}
+
+/* Mermaid in light mode — transparent nodes, match page background */
+[data-md-color-scheme="default"] .mermaid .node rect,
+[data-md-color-scheme="default"] .mermaid .node polygon,
+[data-md-color-scheme="default"] .mermaid .node circle {
+  fill: #ffffff !important;
+  stroke: #d1d9e0 !important;
+}
+
+[data-md-color-scheme="default"] .mermaid .edgeLabel rect {
+  fill: #ffffff !important;
+  stroke: none !important;
+}
+
+[data-md-color-scheme="default"] .mermaid .transition-group rect,
+[data-md-color-scheme="default"] .mermaid .label-container {
+  stroke: none !important;
 }
 
 /* --------------------------------------------------------------------------
