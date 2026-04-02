@@ -12,6 +12,7 @@ Hardware architecture, type theory, and the spaces between.
 
 Recent posts from the [blog](blog/index.md):
 
+- **Why the Kaleidoscope Looks Symmetric When It Isn't** — scale-space filtration and the gap between math and perception
 - **A Fourth Point in the SIMT Divergence Design Space** — auto-diverging branches on a hobbyist FPGA
 
 ## Software
