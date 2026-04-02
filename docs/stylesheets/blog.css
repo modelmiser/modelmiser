@@ -259,10 +259,23 @@
 [data-md-color-scheme="slate"] .mermaid .edgeLabel {
   background: #131d2a !important;
   color: #8d96a0 !important;
+  border: none !important;
+  outline: none !important;
 }
 
 [data-md-color-scheme="slate"] .mermaid .edgeLabel span {
   color: #8d96a0 !important;
+  border: none !important;
+}
+
+[data-md-color-scheme="slate"] .mermaid .edgeLabel rect {
+  fill: #131d2a !important;
+  stroke: none !important;
+}
+
+[data-md-color-scheme="slate"] .mermaid .transition-group rect,
+[data-md-color-scheme="slate"] .mermaid .label-container {
+  stroke: none !important;
 }
 
 /* --------------------------------------------------------------------------
