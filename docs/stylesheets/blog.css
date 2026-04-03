@@ -4,12 +4,10 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Font stack — Segoe UI with sensible fallbacks
+   Colors
    -------------------------------------------------------------------------- */
 
 :root {
-  --md-text-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
-  --md-code-font: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   --mm-amber: #d4880f;
   --mm-amber-light: #e8a020;
   --mm-amber-dim: #8b5e0f;
@@ -49,9 +47,21 @@
   line-height: 1.5;            /* GitHub normal */
 }
 
-/* Headings: GitHub Primer scale (markdown rendering) */
+/* Headings: Exo 2 everywhere */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-header__title,
+.md-nav__title,
+.md-nav__link,
+.md-tabs__link,
+.md-footer-nav__title,
+.md-sidebar__scrollwrap .md-nav__item {
+  font-family: "Exo 2", sans-serif;
+}
+
 .md-typeset h1 {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.5em;
   line-height: 1.25;
   margin-top: 1.5rem;
@@ -107,9 +117,7 @@
 }
 
 .md-typeset pre {
-  margin: 1.5rem -1rem;       /* code blocks bleed wider than prose */
-  padding-left: 1rem;
-  padding-right: 1rem;
+  margin: 1.5rem 0;
   border-radius: 6px;
   border-top: 2px solid var(--mm-amber-dim);
 }
