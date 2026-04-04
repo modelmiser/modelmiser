@@ -23,13 +23,14 @@
   padding: 3rem 2rem 2rem;
   margin: -0.5rem -1rem 2rem;
   border-radius: 6px;
+  /* Ensure symmetric centering — override any inherited padding/margin asymmetry */
   background:
     repeating-linear-gradient(
       to bottom,
       transparent,
-      transparent 10px,
-      rgba(255, 255, 255, 0.04) 10px,
-      rgba(255, 255, 255, 0.04) 12px
+      transparent 14px,
+      rgba(212, 136, 15, 0.08) 14px,
+      rgba(212, 136, 15, 0.08) 15px
     ),
     radial-gradient(
       ellipse at center 40%,
@@ -44,9 +45,9 @@
     repeating-linear-gradient(
       to bottom,
       transparent,
-      transparent 10px,
-      rgba(0, 0, 0, 0.05) 10px,
-      rgba(0, 0, 0, 0.05) 12px
+      transparent 14px,
+      rgba(212, 136, 15, 0.06) 14px,
+      rgba(212, 136, 15, 0.06) 15px
     ),
     radial-gradient(
       ellipse at center 40%,
@@ -54,6 +55,13 @@
       transparent 60%
     ),
     var(--md-default-bg-color--lighter);
+}
+
+/* Material's .md-typeset adds left padding for list indentation — zero it inside hero */
+.hero.md-typeset,
+.hero .md-typeset {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 .hero h1 {
