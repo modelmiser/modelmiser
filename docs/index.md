@@ -12,7 +12,7 @@ Hardware architecture, type theory, and the spaces between.
 
 Recent posts from the [blog](blog/index.md):
 
-- [**Compose From the Bass**](blog/posts/compose-from-the-bass.md) — constraint-first design across GPU, FPGA, and CPU
+- [**Compose From the Bass**](blog/posts/compose-from-the-bass.md){ .weekend } — constraint-first design across GPU, FPGA, and CPU
 - [**A Fourth Point in the SIMT Divergence Design Space**](blog/posts/auto-diverge.md) — auto-diverging branches on a hobbyist FPGA
 - [**Why the Kaleidoscope Looks Symmetric When It Isn't**](blog/posts/symmetry-gap.md) — scale-space filtration and the gap between math and perception
 
