@@ -27,9 +27,9 @@
     repeating-linear-gradient(
       to bottom,
       transparent,
-      transparent 3px,
-      rgba(255, 255, 255, 0.04) 3px,
-      rgba(255, 255, 255, 0.04) 4px
+      transparent 10px,
+      rgba(255, 255, 255, 0.04) 10px,
+      rgba(255, 255, 255, 0.04) 12px
     ),
     radial-gradient(
       ellipse at center 40%,
@@ -44,9 +44,9 @@
     repeating-linear-gradient(
       to bottom,
       transparent,
-      transparent 3px,
-      rgba(0, 0, 0, 0.05) 3px,
-      rgba(0, 0, 0, 0.05) 4px
+      transparent 10px,
+      rgba(0, 0, 0, 0.05) 10px,
+      rgba(0, 0, 0, 0.05) 12px
     ),
     radial-gradient(
       ellipse at center 40%,
