@@ -1,12 +1,12 @@
-<div style="text-align: center; margin: 2rem 0 1rem;">
-  <img src="assets/logo.jpeg" alt="ModelMiser" style="width: 260px; height: 260px; border-radius: 50%; object-fit: cover;">
-</div>
+<div class="hero" markdown>
+
+<img src="assets/logo.jpeg" alt="ModelMiser" class="hero-avatar">
 
 # ModelMiser
 
 Hardware architecture, type theory, and the spaces between.
 
----
+</div>
 
 ## Writing
 

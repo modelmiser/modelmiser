@@ -15,6 +15,39 @@
 }
 
 /* --------------------------------------------------------------------------
+   Landing page hero — elevated panel with amber accent
+   -------------------------------------------------------------------------- */
+
+.hero {
+  text-align: center;
+  padding: 2.5rem 2rem 1.5rem;
+  margin: -0.5rem -1rem 1.5rem;
+  border-top: 2px solid var(--mm-amber-dim);
+  border-radius: 0 0 8px 8px;
+  background: var(--md-default-bg-color--light);
+}
+
+.hero h1 {
+  border-bottom: none !important;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.hero p {
+  color: var(--md-default-fg-color--light);
+  margin-bottom: 0;
+}
+
+.hero-avatar {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 3px var(--md-default-bg-color--light),
+              0 0 0 5px var(--mm-amber-dim);
+}
+
+/* --------------------------------------------------------------------------
    Header logo — circular mask matching landing page
    -------------------------------------------------------------------------- */
 
