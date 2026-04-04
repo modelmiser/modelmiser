@@ -23,7 +23,37 @@
   padding: 3rem 2rem 2rem;
   margin: -0.5rem -1rem 2rem;
   border-radius: 6px;
-  background: var(--md-default-bg-color--lighter);
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 3px,
+      rgba(255, 255, 255, 0.015) 3px,
+      rgba(255, 255, 255, 0.015) 4px
+    ),
+    radial-gradient(
+      ellipse at center 40%,
+      rgba(212, 136, 15, 0.06) 0%,
+      transparent 60%
+    ),
+    var(--md-default-bg-color--lighter);
+}
+
+[data-md-color-scheme="default"] .hero {
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 3px,
+      rgba(0, 0, 0, 0.02) 3px,
+      rgba(0, 0, 0, 0.02) 4px
+    ),
+    radial-gradient(
+      ellipse at center 40%,
+      rgba(212, 136, 15, 0.06) 0%,
+      transparent 60%
+    ),
+    var(--md-default-bg-color--lighter);
 }
 
 .hero h1 {
