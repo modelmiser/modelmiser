@@ -216,4 +216,5 @@ That's not "optimize harder." That's picking up the bass.
 
 🦬☀️ *Cross-domain observation from the [warp-core](../../research/warp-core.md) FPGA project
 and [warp-types](../../research/warp-types.md) GPU type system.
+Next: [The Constraint You Already Had](../../05/the-constraint-you-already-had/).
 [GitHub](https://github.com/modelmiser).*

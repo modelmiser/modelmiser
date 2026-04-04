@@ -206,8 +206,9 @@ The geometry is a map. The songwriter is the territory.
 
 ---
 
-🦬☀️ *Cross-domain observation from the [warp-core](../../research/warp-core.md)
-FPGA project and [warp-types](../../research/warp-types.md) GPU type system.
+🦬☀️ *Cross-domain observation from the [warp-core](../../research/warp-core.md) FPGA project,
+[warp-types](../../research/warp-types.md) GPU type system, and
+[warp-types-sat](https://crates.io/crates/warp-types-sat) constraint solver.
 Previously: [Compose From the Bass](../../04/compose-from-the-bass/) and
 [The Constraint You Already Had](../../05/the-constraint-you-already-had/).
 [GitHub](https://github.com/modelmiser).*
