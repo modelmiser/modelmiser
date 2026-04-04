@@ -328,18 +328,9 @@
 }
 
 /* --------------------------------------------------------------------------
-   Hide right-side TOC on blog posts — it's for docs, not essays
-   Blog posts use the scroll, not the sidebar
+   Right-side TOC — keep on blog posts (useful for navigation),
+   hide on landing page and blog index (no useful headings)
    -------------------------------------------------------------------------- */
-
-.md-sidebar--secondary {
-  display: none;
-}
-
-/* Reclaim the space */
-.md-content {
-  margin-right: auto;
-}
 
 /* --------------------------------------------------------------------------
    Blog index — post cards with excerpts

@@ -1,3 +1,8 @@
+---
+hide:
+  - toc
+---
+
 <div style="text-align: center; margin: 2rem 0 1rem;">
   <img src="assets/logo.jpeg" alt="ModelMiser" style="width: 260px; height: 260px; border-radius: 50%; object-fit: cover;">
 </div>
