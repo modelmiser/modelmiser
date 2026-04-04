@@ -393,19 +393,19 @@
    -------------------------------------------------------------------------- */
 
 /* --------------------------------------------------------------------------
-   Cross-domain spec-ulate posts — amber links on landing page AND blog index
-   Add new cross-domain post slugs here.
+   Cross-domain spec-ulate posts — amber links everywhere
+   Landing page: .crossdomain class (manual)
+   Blog index: :has() targets posts with crossdomain category (automatic)
+   New posts just need `categories: [crossdomain]` in frontmatter.
    -------------------------------------------------------------------------- */
 
 .md-typeset a.crossdomain,
-.md-typeset a[href*="compose-from-the-bass"],
-.md-typeset a[href*="the-constraint-you-already-had"] {
+.md-post:has(a[href*="crossdomain"]) h2 a {
   color: var(--mm-amber-light);
 }
 
 .md-typeset a.crossdomain:hover,
-.md-typeset a[href*="compose-from-the-bass"]:hover,
-.md-typeset a[href*="the-constraint-you-already-had"]:hover {
+.md-post:has(a[href*="crossdomain"]) h2 a:hover {
   color: var(--mm-amber);
 }
 

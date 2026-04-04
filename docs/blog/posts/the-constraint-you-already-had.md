@@ -1,5 +1,7 @@
 ---
 date: 2026-04-05
+categories:
+  - crossdomain
 ---
 
 # The Constraint You Already Had

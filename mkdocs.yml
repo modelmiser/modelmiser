@@ -37,7 +37,9 @@ plugins:
       post_date_format: long
       post_excerpt: required
       archive: false
-      categories: false
+      categories: true
+      categories_allowed:
+        - crossdomain
   - mermaid2:
       arguments:
         theme: base
