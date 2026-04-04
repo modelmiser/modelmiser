@@ -196,6 +196,6 @@ question is whether you've noticed.
 ---
 
 🦬☀️ *[warp-types](../../research/warp-types.md) is a type-safe GPU warp library
-on [crates.io](https://crates.io/crates/warp-types). warp-types-sat (not yet
-published) extends it to SAT solving.
+on [crates.io](https://crates.io/crates/warp-types).
+[warp-types-sat](https://crates.io/crates/warp-types-sat) extends it to SAT solving.
 [GitHub](https://github.com/modelmiser/warp-types).*
