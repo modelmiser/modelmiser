@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "pip install -r requirements.txt && mkdocs build"
+  }
+}
