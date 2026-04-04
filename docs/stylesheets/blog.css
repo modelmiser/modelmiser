@@ -333,14 +333,14 @@
    -------------------------------------------------------------------------- */
 
 /* --------------------------------------------------------------------------
-   Weekend spec-ulate posts — amber links to distinguish from regular posts
+   Cross-domain spec-ulate posts — amber links to distinguish from regular posts
    -------------------------------------------------------------------------- */
 
-.md-typeset a.weekend {
+.md-typeset a.crossdomain {
   color: var(--mm-amber-light);
 }
 
-.md-typeset a.weekend:hover {
+.md-typeset a.crossdomain:hover {
   color: var(--mm-amber);
 }
 
