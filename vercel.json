@@ -1,4 +1,4 @@
 {
-  "outputDirectory": "site",
-  "buildCommand": ""
+  "buildCommand": "pip install -r requirements.txt && mkdocs build",
+  "outputDirectory": "site"
 }

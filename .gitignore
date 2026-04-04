@@ -7,3 +7,6 @@ DEVLOG.md
 TODO.md
 AUTHORING.md
 editorial_voice.md
+site/
+.vercel
+.env*.local
