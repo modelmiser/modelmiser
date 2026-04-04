@@ -28,12 +28,12 @@
       to bottom,
       transparent,
       transparent 3px,
-      rgba(255, 255, 255, 0.015) 3px,
-      rgba(255, 255, 255, 0.015) 4px
+      rgba(255, 255, 255, 0.04) 3px,
+      rgba(255, 255, 255, 0.04) 4px
     ),
     radial-gradient(
       ellipse at center 40%,
-      rgba(212, 136, 15, 0.06) 0%,
+      rgba(212, 136, 15, 0.15) 0%,
       transparent 60%
     ),
     var(--md-default-bg-color--lighter);
@@ -45,12 +45,12 @@
       to bottom,
       transparent,
       transparent 3px,
-      rgba(0, 0, 0, 0.02) 3px,
-      rgba(0, 0, 0, 0.02) 4px
+      rgba(0, 0, 0, 0.05) 3px,
+      rgba(0, 0, 0, 0.05) 4px
     ),
     radial-gradient(
       ellipse at center 40%,
-      rgba(212, 136, 15, 0.06) 0%,
+      rgba(212, 136, 15, 0.12) 0%,
       transparent 60%
     ),
     var(--md-default-bg-color--lighter);
