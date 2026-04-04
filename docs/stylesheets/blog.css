@@ -393,14 +393,19 @@
    -------------------------------------------------------------------------- */
 
 /* --------------------------------------------------------------------------
-   Cross-domain spec-ulate posts — amber links to distinguish from regular posts
+   Cross-domain spec-ulate posts — amber links on landing page AND blog index
+   Add new cross-domain post slugs here.
    -------------------------------------------------------------------------- */
 
-.md-typeset a.crossdomain {
+.md-typeset a.crossdomain,
+.md-typeset a[href*="compose-from-the-bass"],
+.md-typeset a[href*="the-constraint-you-already-had"] {
   color: var(--mm-amber-light);
 }
 
-.md-typeset a.crossdomain:hover {
+.md-typeset a.crossdomain:hover,
+.md-typeset a[href*="compose-from-the-bass"]:hover,
+.md-typeset a[href*="the-constraint-you-already-had"]:hover {
   color: var(--mm-amber);
 }
 
