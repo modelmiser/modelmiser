@@ -12,11 +12,7 @@ Hardware architecture, type theory, and the spaces between.
 
 Recent posts from the [blog](blog/index.md):
 
-- [**Twenty Soft Constraints**](blog/posts/twenty-soft-constraints.md){ .crossdomain } — when a formal model collapses composition and improvisation into one parameter
-- [**The Constraint You Already Had**](blog/posts/the-constraint-you-already-had.md){ .crossdomain } — when the correctness machinery is the scheduling machinery
-- [**Compose From the Bass**](blog/posts/compose-from-the-bass.md){ .crossdomain } — constraint-first design across GPU, FPGA, and CPU
-- [**A Fourth Point in the SIMT Divergence Design Space**](blog/posts/auto-diverge.md) — auto-diverging branches on a hobbyist FPGA
-- [**Why the Kaleidoscope Looks Symmetric When It Isn't**](blog/posts/symmetry-gap.md) — scale-space filtration and the gap between math and perception
+<!-- blog-recent -->
 
 ## Software
 

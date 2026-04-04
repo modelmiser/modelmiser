@@ -30,6 +30,9 @@ theme:
     text: DM Sans
     code: JetBrains Mono
 
+hooks:
+  - hooks/landing.py
+
 plugins:
   - search
   - blog:
