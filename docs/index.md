@@ -28,4 +28,4 @@ Recent posts from the [blog](blog/index.md):
 
 ## Elsewhere
 
-- [GitHub](https://github.com/modelmiser)
+- [**GitHub**](https://github.com/modelmiser)
