@@ -20,11 +20,10 @@
 
 .hero {
   text-align: center;
-  padding: 2.5rem 2rem 1.5rem;
-  margin: -0.5rem -1rem 1.5rem;
-  border-top: 2px solid var(--mm-amber-dim);
-  border-radius: 0 0 8px 8px;
-  background: var(--md-default-bg-color--light);
+  padding: 3rem 2rem 2rem;
+  margin: -0.5rem -1rem 2rem;
+  border-radius: 6px;
+  background: var(--md-default-bg-color--lighter);
 }
 
 .hero h1 {
@@ -43,8 +42,6 @@
   height: 260px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 0 0 3px var(--md-default-bg-color--light),
-              0 0 0 5px var(--mm-amber-dim);
 }
 
 /* --------------------------------------------------------------------------
