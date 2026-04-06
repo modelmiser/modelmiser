@@ -43,6 +43,9 @@ plugins:
       categories: true
       categories_allowed:
         - crossdomain
+        - warp-core
+        - warp-types
+        - mm-dream
       draft_if_future_date: false
   - mermaid2:
       arguments:

@@ -1,5 +1,7 @@
 ---
 date: 2026-04-02
+categories:
+  - warp-core
 ---
 
 # A Fourth Point in the SIMT Divergence Design Space

@@ -1,5 +1,5 @@
 ---
-date: 2026-04-06
+date: 2026-04-06 08:00:00
 categories:
   - crossdomain
 ---

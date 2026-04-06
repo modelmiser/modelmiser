@@ -1,5 +1,7 @@
 ---
 date: 2026-03-19
+categories:
+  - mm-dream
 ---
 
 # Why the Kaleidoscope Looks Symmetric When It Isn't
