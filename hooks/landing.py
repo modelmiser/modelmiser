@@ -33,11 +33,17 @@ def _parse_post(filepath):
         return None
     frontmatter = fm_match.group(1)
 
-    # Date
-    date_match = re.search(r"^date:\s*(\d{4}-\d{2}-\d{2})", frontmatter, re.MULTILINE)
+    # Date (with optional time for same-day ordering)
+    date_match = re.search(
+        r"^date:\s*(\d{4}-\d{2}-\d{2})(?:\s+(\d{2}:\d{2}:\d{2}))?",
+        frontmatter,
+        re.MULTILINE,
+    )
     if not date_match:
         return None
     date = date_match.group(1)
+    time = date_match.group(2) or "00:00:00"
+    sort_key = f"{date} {time}"
 
     # Categories
     categories = []
@@ -71,6 +77,7 @@ def _parse_post(filepath):
 
     return {
         "date": date,
+        "sort_key": sort_key,
         "title": title,
         "subtitle": subtitle,
         "categories": categories,
@@ -121,8 +128,8 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
         if parsed:
             posts.append(parsed)
 
-    # Sort by date descending
-    posts.sort(key=lambda p: p["date"], reverse=True)
+    # Sort by date+time descending (newest first, highest time first within same day)
+    posts.sort(key=lambda p: p["sort_key"], reverse=True)
 
     writing_list = _build_writing_list(posts)
     return markdown.replace(PLACEHOLDER, writing_list)
