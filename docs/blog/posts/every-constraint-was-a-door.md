@@ -234,6 +234,29 @@ signal processing) are firmly in the SIMT-wins regime. General-purpose
 compute kernels still need careful attention to keep the SIMT advantage
 positive.
 
+## MIPS learned this the hard way
+
+The pattern — accepting a constraint instead of fighting it, and discovering
+the constraint was guarding a better design — has a well-known counterexample.
+MIPS exposed its pipeline bubble as a "feature": the branch delay slot. The
+instruction after a branch always executes, regardless of whether the branch
+is taken. The compiler fills it with useful work. It was a clever encoding of
+a 2-stage pipeline artifact into the ISA.
+
+It was also a mistake that haunted MIPS for decades. Every subsequent pipeline
+revision — superscalar, out-of-order, deeper pipelines — had to honor the
+delay slot contract. The constraint became permanent architecture, not a door
+to better design. RISC-V and ARM both chose to squash the wasted cycle instead,
+paying one dead fetch but preserving pipeline freedom. In warp-core's 2-stage
+pipeline, the squash costs zero LUTs — a single flip-flop gates writeback for
+exactly one cycle.
+
+The difference: MIPS treated the pipeline bubble as a surface to optimize.
+Warp-core treated the 4K IMEM limit as a signal about where different kinds
+of code belong. One constraint was absorbed into the architecture's semantics,
+making it permanent. The other was absorbed into the architecture's *topology*,
+revealing a natural partition.
+
 ## Three languages, three domains
 
 The final architecture has three native languages, each matched to its domain:
