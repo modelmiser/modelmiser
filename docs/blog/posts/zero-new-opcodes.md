@@ -14,7 +14,7 @@ The entire warp scheduler fits in CSR space — no new decode logic, no new pipe
 
 Adding capabilities to an ISA is expensive. Not in the "we need more transistors" sense — in the "every new opcode is a permanent tax on every future design decision" sense.
 
-warp-core is a soft GPU on an ECP5-85F — 4 SIMT pipelines, 8 lanes each, 95 instructions in ISA v0.5.2. The [previous post](../../04/a-fourth-point-in-the-simt-divergence-design-space/) covered the divergence model. This one covers what happened when the ISA needed a warp scheduler: the ability to spawn warps, detect completion, and dispatch work across the 4 pipelines.
+warp-core is a soft GPU on an ECP5-85F — 4 SIMT pipelines, 8 lanes each, 95 instructions in ISA v0.5.2. The [previous post](../../04/a-fourth-point-in-the-simt-divergence-design-space/) covered the divergence model. This one covers what happened earlier in the design, when the ISA needed a warp scheduler — the ability to spawn warps, detect completion, and dispatch work across the 4 pipelines. At this point in the project, one of the four warps ran the scheduler as hand-written SIMT assembly. (A [later architectural change](../../04/every-constraint-was-a-door/) moved the control plane to a RISC-V core, but the CSR design described here predates and survives that pivot.)
 
 Every ISA faces this moment. You need a new capability. The obvious path: define new instructions. Each one needs an opcode encoding slot, decoder logic, pipeline integration, hazard analysis, assembler support, and documentation. On a soft GPU where LUT4s are the currency and the decode path is already the critical timing path, "just add an instruction" is not free.
 
