@@ -108,18 +108,33 @@ def _build_writing_list(posts):
     return "\n".join(lines)
 
 
-def on_page_markdown(markdown, page, config, files, **kwargs):
-    """Replace <!-- blog-recent --> placeholder with auto-generated post list."""
-    if page.file.src_path != "index.md":
-        return markdown
-    if PLACEHOLDER not in markdown:
-        return markdown
+def _build_category_list(posts, posts_rel):
+    """Generate markdown list for a category's latest posts."""
+    if not posts:
+        return "*No posts yet.*"
+    lines = []
+    for post in posts:
+        link = f"{posts_rel}/{post['slug']}.md"
+        entry = f"- [**{post['title']}**]({link})"
+        if post["subtitle"]:
+            sub = post["subtitle"]
+            sub_lower = sub[0].lower() + sub[1:] if sub else sub
+            if sub_lower.endswith("."):
+                sub_lower = sub_lower[:-1]
+            entry += f" — {sub_lower}"
+        lines.append(entry)
+    return "\n".join(lines)
 
-    # Find and parse all posts
+
+CATEGORY_RE = re.compile(r"<!-- blog-posts:(\S+) -->")
+CATEGORY_LIMIT = 3
+
+
+def _parse_all_posts(config):
+    """Parse all blog posts, sorted newest-first."""
     posts_path = os.path.join(config["docs_dir"], "blog", "posts")
     if not os.path.isdir(posts_path):
-        return markdown
-
+        return []
     posts = []
     for filename in os.listdir(posts_path):
         if not filename.endswith(".md"):
@@ -127,9 +142,37 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
         parsed = _parse_post(os.path.join(posts_path, filename))
         if parsed:
             posts.append(parsed)
-
-    # Sort by date+time descending (newest first, highest time first within same day)
     posts.sort(key=lambda p: p["sort_key"], reverse=True)
+    return posts
 
-    writing_list = _build_writing_list(posts)
-    return markdown.replace(PLACEHOLDER, writing_list)
+
+def on_page_markdown(markdown, page, config, files, **kwargs):
+    """Replace blog placeholders with auto-generated post lists.
+
+    Supported placeholders:
+      <!-- blog-recent -->             on index.md: all posts, newest first
+      <!-- blog-posts:CATEGORY -->     on any page: latest 3 posts in category
+    """
+    has_landing = PLACEHOLDER in markdown and page.file.src_path == "index.md"
+    has_category = CATEGORY_RE.search(markdown)
+
+    if not has_landing and not has_category:
+        return markdown
+
+    posts = _parse_all_posts(config)
+    if not posts:
+        return markdown
+
+    if has_landing:
+        markdown = markdown.replace(PLACEHOLDER, _build_writing_list(posts))
+
+    if has_category:
+        page_dir = os.path.dirname(page.file.src_path)
+        posts_rel = os.path.relpath("blog/posts", page_dir) if page_dir else "blog/posts"
+
+        for match in CATEGORY_RE.finditer(markdown):
+            category = match.group(1)
+            filtered = [p for p in posts if category in p["categories"]][:CATEGORY_LIMIT]
+            markdown = markdown.replace(match.group(0), _build_category_list(filtered, posts_rel))
+
+    return markdown

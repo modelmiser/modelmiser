@@ -19,4 +19,4 @@ bridge). A RISC-V kernel dispatches and manages warp lifecycles from Rust firmwa
 
 ## Blog posts
 
-- [A Fourth Point in the SIMT Divergence Design Space](../blog/posts/auto-diverge.md)
+<!-- blog-posts:warp-core -->

@@ -17,7 +17,7 @@ rejects these bugs before they reach the GPU.
 
 ## Blog posts
 
-- [A Fourth Point in the SIMT Divergence Design Space](../blog/posts/auto-diverge.md) — warp-core's auto-diverge model grew out of warp-types
+<!-- blog-posts:warp-types -->
 
 ## Links
 
