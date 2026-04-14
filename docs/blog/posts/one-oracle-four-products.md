@@ -10,6 +10,8 @@ A SAT solver answers one question: is this set of clauses satisfiable? Four crat
 
 <!-- more -->
 
+Last week, [instrumenting this same SAT solver turned a falsified hypothesis into a 37% improvement](from-falsification-to-minus-thirty-seven-percent.md). That solver is also the oracle for three other verification products. Each poses the same yes-or-no question in a different shape.
+
 ## The oracle
 
 `solve_watched_budget` takes a clause database, a variable count, and a conflict budget. It returns SAT (with an assignment), UNSAT, or Unknown (budget exceeded). The CDCL engine inside — watched literals, VSIDS, Luby restarts, 1-UIP conflict analysis — spans several thousand lines. But from the outside, it's a black box that answers yes-or-no questions about Boolean formulas.

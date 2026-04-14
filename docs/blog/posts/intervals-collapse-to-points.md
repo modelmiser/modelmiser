@@ -10,6 +10,10 @@ What happens to formal verification when the hardware is deterministic.
 
 <!-- more -->
 
+## What this post needs you to know
+
+**Session types** are types that describe communication protocols — what gets sent, in what order, between which endpoints. Protocol violations become type errors at compile time. **Timed session types** add clock annotations to each action: "this send occurs at cycle 3." On non-deterministic networks those clocks are intervals, and verifying them is a constraint-solving problem. On **deterministic hardware** — where every instruction and channel has a known cycle cost — the intervals collapse to points, and so do the proofs. The sections below walk through what that collapse actually changes.
+
 ## The timing problem in session types
 
 Session types describe the shape of communication: this endpoint sends an integer, then receives a boolean, then terminates. The type system guarantees that two endpoints follow complementary protocols — if one sends, the other receives. No runtime check needed. The compiler enforces it.

@@ -10,6 +10,22 @@ When native_decide returns false, the bug is real.
 
 <!-- more -->
 
+## The mesh
+
+```mermaid
+flowchart LR
+    J10[J10<br/>source]
+    J11[J11<br/>router]
+    J12[J12<br/>sink]
+
+    J10 -->|chan_right_fwd| J11
+    J11 -->|chan_right_fwd| J12
+    J12 -->|chan_left_rev| J11
+    J11 -->|chan_left_rev| J10
+```
+
+Three J1 Forth cores arranged left to right on a 3×3 ECP5 mesh. Forward channels (`chan_right_fwd`) carry data rightward; reverse channels (`chan_left_rev`) carry it back. Channel names refer to the *direction of travel*, not the side of the core they connect to — which is exactly where the bug lives.
+
 ## The wrong channel
 
 J12's program said `recv_right`. J11 is to J12's left.
