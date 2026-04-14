@@ -45,6 +45,7 @@ plugins:
         - crossdomain
         - warp-core
         - warp-types
+        - Sol
         - mm-dream
       draft_if_future_date: false
   - mermaid2:
