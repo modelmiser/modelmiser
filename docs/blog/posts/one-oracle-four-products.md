@@ -1,5 +1,5 @@
 ---
-date: 2026-04-13
+date: 2026-04-13 10:00:00
 categories:
   - warp-types
 ---
@@ -69,4 +69,4 @@ These are real limitations, not future work. They're the price of composability 
 
 ---
 
-🦬☀️ *warp-types is a verification stack: SAT, BMC, SMT (QF_EUF), and PDR — four crates, one oracle. All on [crates.io](https://crates.io/crates/warp-types-sat). [GitHub](https://github.com/modelmiser/warp-types).*
+🦬☀️ *warp-types is a verification stack: SAT, BMC, SMT, and PDR — four crates, one oracle. [GitHub](https://github.com/modelmiser/warp-types).*
