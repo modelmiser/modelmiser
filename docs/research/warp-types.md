@@ -3,7 +3,7 @@
 Linear typestate for GPU warp divergence: compile-time prevention of
 shuffle-from-inactive-lane bugs.
 
-**Status:** v0.3.1 on crates.io
+**Status:** v0.3.2 on crates.io. Nelson-Oppen SMT combination (QF_UFBV) shipped.
 
 **Repository:** [github.com/modelmiser/warp-types](https://github.com/modelmiser/warp-types)
 

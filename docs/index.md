@@ -21,7 +21,7 @@ Recent posts from the [blog](blog/index.md):
 
 ## Research
 
-- [**warp-core**](research/warp-core.md) — Soft GPU on ECP5 — 4-warp SIMT with virtual peripherals
+- [**warp-core**](research/warp-core.md) — Soft GPU on ECP5 — 4-warp D4 pinwheel + 9-core J1 Forth mesh
 - [**warp-types**](research/warp-types.md) — Linear typestate for GPU divergence — compile-time shuffle safety
 
 ## Elsewhere
