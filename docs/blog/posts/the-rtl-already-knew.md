@@ -50,16 +50,16 @@ L(program, seed) = insns_executed(program, seed) + K_RTL
 ```
 
 `insns_executed` is a function of the program's control flow for a
-given seed — trace J1 instructions from reset until the halt write,
-counting retired instructions. Pure symbolic execution. For the
-22-instruction countdown:
+given seed — trace J1 instructions from `envelope_req_fire` until the
+halt write, counting retired instructions. Pure symbolic execution.
+For the 22-instruction countdown:
 
 | Phase                            | Instructions |
 |----------------------------------|--------------|
-| Prologue (PC 0..1)               | 2            |
-| Full loop iter (PC 2..9) × seed  | 8·seed       |
+| Prologue                         | 2            |
+| Full loop iter × seed            | 8·seed       |
 | Final iter (counter == 0)        | 6            |
-| Exit path (PC 13..19)            | 7            |
+| Exit path                        | 7            |
 | **Total**                        | **15 + 8·seed** |
 
 `K_RTL` is the pipeline-startup constant — the difference between
@@ -131,27 +131,28 @@ well outside the declared `[0, 10]` domain:
 | 100  |     8     |    8     |   0   |
 
 Cycle-exact on every seed, including seeds we never declared. `K_RTL`
-is not a countdown artifact. But countdown and echo are extremes —
-maximal looping and zero looping. What if `K_RTL = 1` holds there
-and breaks at intermediate loop sizes?
+is not a countdown artifact.
 
-## Triangulating with coprime slopes
+## Triangulating with a different loop topology
 
-Design a third kernel that loops, but with a different per-iteration
-count than the countdown. Specifically: *coprime* to the countdown's
-8. Two measurements with proportional slopes don't rule out a hidden
-constant that's a multiple of that slope. Two coprime slopes do.
+Countdown and echo are the extremes — maximal looping and none at
+all. What if `K_RTL = 1` holds at those poles but breaks for a loop
+body of different size? A third kernel with a DIFFERENT per-iter
+count than countdown's 8 tests whether K_RTL depends on loop shape
+rather than loop presence.
 
 The decrement kernel: 11 instructions with a 4-insn loop body
-(`DUP; ZBRANCH exit; T-1; JUMP`). Per-iter count 4, coprime to the
-countdown's 8.
+(`DUP; ZBRANCH exit; T-1; JUMP`). Half the countdown's per-iter
+count, and tight enough to have only one plausible encoding under
+the J1 ISA we already modeled. No new decoder cases, no new
+`T_mux` selectors.
 
 | Phase                            | Instructions |
 |----------------------------------|--------------|
-| Prologue (PC 0..1)               | 2            |
-| Full loop iter (PC 2..5) × seed  | 4·seed       |
+| Prologue                         | 2            |
+| Full loop iter × seed            | 4·seed       |
 | Final iter (counter == 0)        | 2            |
-| Exit path (PC 6..10)             | 5            |
+| Exit path                        | 5            |
 | **Total**                        | **9 + 4·seed** |
 
 Extraction predicts `L(seed) = 10 + 4·seed`, envelope `Latency<10, 50>`.
@@ -224,8 +225,9 @@ does the work for a given kernel.
 ## What we actually showed
 
 Two kernels cycle-exact against silicon, including seeds outside the
-declared domain. A third with a coprime slope predicted but not yet
-measured. A pipeline constant that survives changing loop topology.
+declared domain. A third with half the per-iter count predicted but
+not yet measured. A pipeline constant that survives changing loop
+topology.
 `Latency<T, L_MIN, L_MAX>` goes from "type the runtime filled in after
 observation" to "type the RTL filled in before the bitstream booted."
 
