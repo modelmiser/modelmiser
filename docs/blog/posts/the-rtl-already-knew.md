@@ -66,7 +66,10 @@ For the 22-instruction countdown:
 instructions retired and cycles counted by the envelope. Derived
 structurally from `super_j1_mailbox.v` + `latency_envelope.v`, it
 encodes one cycle of IMEM read latency between `req_fire` asserting
-and the first instruction becoming observable. So `K_RTL = 1`, and:
+and the first instruction becoming observable. The equation
+`L = insns + K_RTL` is only that simple when the pipeline doesn't
+stall mid-execution; for the J1's single-cycle ALU, branch, and
+IO-port access instructions, it doesn't. So `K_RTL = 1`, and:
 
 ```
 L(countdown, seed) = (15 + 8·seed) + 1 = 16 + 8·seed
@@ -143,38 +146,37 @@ rather than loop presence.
 
 The decrement kernel: 11 instructions with a 4-insn loop body
 (`DUP; ZBRANCH exit; T-1; JUMP`). Half the countdown's per-iter
-count, and tight enough to have only one plausible encoding under
-the J1 ISA we already modeled. No new decoder cases, no new
-`T_mux` selectors.
+count, using only opcodes the J1 ISA already models — no new decoder
+cases, no new `T_mux` selectors. The phase breakdown mirrors the
+countdown's: prologue 2, full iter 4·seed, final iter 2, exit path 5.
+Total `9 + 4·seed`, so extraction under `K_RTL = 1` predicts
+`L(seed) = 10 + 4·seed`, envelope `Latency<10, 50>`.
 
-| Phase                            | Instructions |
-|----------------------------------|--------------|
-| Prologue                         | 2            |
-| Full loop iter × seed            | 4·seed       |
-| Final iter (counter == 0)        | 2            |
-| Exit path                        | 5            |
-| **Total**                        | **9 + 4·seed** |
-
-Extraction predicts `L(seed) = 10 + 4·seed`, envelope `Latency<10, 50>`.
-Hardware validation is pending — the same IMEM-write path as the echo,
-so the run is cheap. The prediction under `K_RTL = 1` is specific per
-seed. If silicon agrees, `K_RTL` is independent of per-iteration
-instruction count too. The pipeline constant is a property of the
-pipe, not the program.
+This is a prediction, not a measurement. The decrement kernel hasn't
+run on silicon — the prediction is just the extraction formula fed a
+third program. Hardware validation is pending (same IMEM-write path
+as the echo; no new bitstream). The point of the third kernel is to
+stake out a *falsifiable* prediction: if silicon measures anything
+other than `10 + 4·seed`, the "K_RTL is load-independent on this
+pipeline" claim is wrong, and the nature of the delta tells us
+whether the dependency is on per-iter count, program length, branch
+density, or something else.
 
 ## What derivation buys you
 
-Three kernels, one pipeline constant, predictive power across loop
-topologies. What changes?
+Two kernels cycle-exact against silicon, a third whose prediction
+stakes out the next measurement — what does that buy?
 
 `Latency<L_MIN, L_MAX>` becomes a compile-time output, not a runtime
 input. For kernels whose memory path is fully deterministic —
 BRAM-resident, no SDRAM, no cache, no contention — the bounds are a
-theorem about (RTL invariants) × (program CFG), not a measurement on
-the hardware.
+Lean 4 theorem about (RTL invariants) × (program CFG), not a
+measurement on the hardware. The theorems live in
+`TimedCountdown.lean`, `TimedEcho.lean`, and `TimedDecrement.lean`;
+they typecheck on core Lean 4.28, no Mathlib, seconds to verify.
 
-This complements runtime refinement rather than replacing it. Consider
-the payoff-ratio frame:
+This doesn't replace runtime refinement — the two techniques apply to
+different regimes. Consider the payoff-ratio frame:
 
 ```
 payoff_ratio(refinement) = (L_MAX - L_MIN) / L_MAX
@@ -198,10 +200,12 @@ runtime observation adds nothing that `Latency<8, 8>` didn't already
 declare.
 
 Decrement at 80% is nearly indistinguishable from countdown's 83%
-despite half the absolute cycle reach. That tells you something: the
-payoff spectrum is *shape-set* (by the `L_MIN/L_MAX` ratio), not
-magnitude-set. Useful for deciding which kernels warrant the runtime-
-refinement complexity. Look at the ratio, not the cycle counts.
+despite half the absolute cycle reach. Two data points on the
+interval side is a thin sample, but the pattern is at least
+consistent with a shape-set rather than magnitude-set payoff — the
+`L_MIN/L_MAX` ratio predicts refinement's value, not the absolute
+cycle count. A stronger version of this claim needs a fourth kernel
+at a third magnitude.
 
 ## Where the extraction breaks
 
@@ -212,26 +216,32 @@ picture, the extraction formula needs a term for memory-access
 variance, and the formula stops being an equation.
 
 The planned SDRAM-touching kernel is where we expect extraction to
-disagree with empirical measurement. That's the point where runtime
-refinement becomes load-bearing: the static type declares
-`Latency<16, 96>` as the *worst-case* envelope, and observation
-refines it to an actual cycle count drawn from that interval.
-Certifying extraction hands you the outer bounds for free; runtime
-refinement tells you where in those bounds you actually landed.
+disagree with empirical measurement. A falsifiable prediction: the
+delta scales with row-crossing count, not instruction count —
+extraction predicts `L = insns + K_RTL`, hardware measures
+`L + Σ row_crossings · K_row`, with `K_row` determined by the SDRAM
+controller's auto-refresh and activation costs.
 
-Both techniques are complementary. The spectrum decides which one
-does the work for a given kernel.
+That's the point where extraction stops being an equation and starts
+being a lower bound on a distribution. Runtime refinement earns its
+keep: the static envelope declares the worst-case bound, observation
+tells you where in that bound the specific run landed. Extraction
+and refinement occupy different regimes, and the payoff ratio decides
+which regime a kernel sits in.
 
-## What we actually showed
+## What survives the silicon
 
 Two kernels cycle-exact against silicon, including seeds outside the
-declared domain. A third with half the per-iter count predicted but
-not yet measured. A pipeline constant that survives changing loop
-topology.
+declared domain. A third with half the per-iter count predicted,
+waiting for hardware to confirm or falsify. A pipeline-startup
+constant that held across the two measured kernels and across the
+ingress-to-halt boundary they share.
 `Latency<T, L_MIN, L_MAX>` goes from "type the runtime filled in after
-observation" to "type the RTL filled in before the bitstream booted."
+observation" to "type the RTL and the program filled in before the
+bitstream booted."
 
-The envelope before the silicon. The RTL already knew.
+The envelope before the silicon. For two kernels so far, the RTL
+already knew.
 
 ---
 
