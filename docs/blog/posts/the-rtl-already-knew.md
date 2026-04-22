@@ -120,19 +120,10 @@ across every seed. The envelope collapses to a point:
 
 We loaded this via seven `xact(0, ...)` writes from a MicroPython
 dispatcher — no new bitstream, because `super_j1_sptypes` already
-supports runtime IMEM updates. Five seeds, including 42 and 100
-well outside the declared `[0, 10]` domain:
-
-| seed | predicted | measured | delta |
-|------|-----------|----------|-------|
-|   0  |     8     |    8     |   0   |
-|   1  |     8     |    8     |   0   |
-|   5  |     8     |    8     |   0   |
-|  42  |     8     |    8     |   0   |
-| 100  |     8     |    8     |   0   |
-
-Cycle-exact on every seed, including seeds we never declared. `K_RTL`
-isn't absorbing a countdown-specific structural term.
+supports runtime IMEM updates. Five seeds sweep cycle-exact to 8
+across the board: 0, 1, 5, and two well outside the declared domain
+(42 and 100). Delta zero on every run. `K_RTL` isn't absorbing a
+countdown-specific structural term.
 
 Worth naming what this test *doesn't* rule out. Echo and countdown
 share the same ingress boundary (the `envelope_req_fire` pulse, the
@@ -223,11 +214,14 @@ picture, the extraction formula needs a term for memory-access
 variance, and the formula stops being an equation.
 
 The planned SDRAM-touching kernel is where we expect extraction to
-disagree with empirical measurement. A falsifiable prediction: the
-delta scales with row-crossing count, not instruction count —
+disagree with empirical measurement. A falsifiable prediction:
 extraction predicts `L = insns + K_RTL`, hardware measures
-`L + Σ row_crossings · K_row`, with `K_row` determined by the SDRAM
-controller's auto-refresh and activation costs.
+`L + Σ row_crossings · t_activate + refresh_noise`, where
+`t_activate` is the per-row-activate cost (a function of tRCD plus
+bank-conflict stalls) and `refresh_noise` is a time-dependent term
+set by the controller's tREFI rate. The first term is the one the
+extraction model would need to incorporate; the second is orthogonal
+to access patterns and would appear as bounded jitter.
 
 That's the point where extraction stops being an equation and starts
 being a lower bound on a distribution. Runtime refinement earns its
@@ -238,11 +232,6 @@ which regime a kernel sits in.
 
 ## What survives the silicon
 
-Two kernels cycle-exact against silicon, including seeds outside the
-declared domain. A third kernel with half the per-iter count
-predicted, waiting for hardware to confirm or falsify. A structurally
-derived `K_RTL = 1` that so far matches every measured case on this
-ingress-to-halt harness.
 `Latency<T, L_MIN, L_MAX>` goes from "type the runtime filled in after
 observation" to "type the RTL and the program filled in before the
 bitstream booted."
