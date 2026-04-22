@@ -19,8 +19,8 @@ sends at cycle 3, channel latency is 1, Core 1 receives at cycle 4:
 `4 = 3 + 1`, done. No constraint solver, because every cycle count is
 a compile-time constant.
 
-That argument quietly assumed something: we already knew the sender's
-cycle was 3 and the receiver's cycle was 4. In the ping-pong example
+That argument assumed something: we already knew the sender's cycle
+was 3 and the receiver's cycle was 4. In the ping-pong example
 those numbers were obvious — three instructions of compute plus a
 channel latency. In general, a session type like
 `Timed<T, L_MIN, L_MAX>` is a claim about an interval, and the
@@ -52,15 +52,10 @@ L(program, seed) = insns_executed(program, seed) + K_RTL
 `insns_executed` is a function of the program's control flow for a
 given seed — trace J1 instructions from `envelope_req_fire` until the
 halt write, counting retired instructions. Pure symbolic execution.
-For the 22-instruction countdown:
-
-| Phase                            | Instructions |
-|----------------------------------|--------------|
-| Prologue                         | 2            |
-| Full loop iter × seed            | 8·seed       |
-| Final iter (counter == 0)        | 6            |
-| Exit path                        | 7            |
-| **Total**                        | **15 + 8·seed** |
+For the 22-instruction countdown, the phases add up to `15 + 8·seed`:
+two instructions of prologue, `8·seed` for the main loop, six for the
+final iteration that exits the loop, and seven for the exit path that
+writes the result and signals halt.
 
 `K_RTL` is the pipeline-startup constant — the difference between
 instructions retired and cycles counted by the envelope. Derived
@@ -99,12 +94,15 @@ One kernel doesn't prove the methodology. It proves the methodology
 countdown-specific structural constant, and the match is a happy
 coincidence. We need triangulation.
 
-## A second kernel, nothing like the first
+## A second kernel, along a different control-flow axis
 
-To test whether `K_RTL = 1` is a property of the pipeline rather than
-the countdown, pick a second kernel that is as different from the
-countdown as possible. No loop. No data dependence. Pure straight
-line:
+To test whether `K_RTL = 1` survives the kernel choice, pick a second
+kernel that differs from the countdown along the control-flow axis.
+Same J1 core, same mailbox harness, same IMEM path, same halt
+convention — everything from the ingress down is held constant. What
+changes is whether the program has a loop at all.
+
+The echo kernel: no loop, no data dependence, straight line.
 
 ```
 PC 0: LIT 0x10          push read address
@@ -134,15 +132,26 @@ well outside the declared `[0, 10]` domain:
 | 100  |     8     |    8     |   0   |
 
 Cycle-exact on every seed, including seeds we never declared. `K_RTL`
-is not a countdown artifact.
+isn't absorbing a countdown-specific structural term.
 
-## Triangulating with a different loop topology
+Worth naming what this test *doesn't* rule out. Echo and countdown
+share the same ingress boundary (the `envelope_req_fire` pulse, the
+1-cycle IMEM read) — any harness-level constant that both kernels see
+by construction can't be distinguished from a true pipeline-wide
+`K_RTL` by this pair. The cleaner framing: `K_RTL = 1` is derived
+structurally from the RTL, and two cycle-exact silicon matches are
+consistency evidence, not independent samples of a latent constant.
 
-Countdown and echo are the extremes — maximal looping and none at
-all. What if `K_RTL = 1` holds at those poles but breaks for a loop
-body of different size? A third kernel with a DIFFERENT per-iter
-count than countdown's 8 tests whether K_RTL depends on loop shape
-rather than loop presence.
+## A third kernel along the loop-body-size axis
+
+Countdown and echo bracket the loop-presence axis (max iter vs zero
+iter). They don't bracket the per-iter-count axis — the countdown's
+body is always 8 instructions. A third kernel with a different
+per-iter count pushes on that dimension. Whether silicon agrees or
+disagrees then tells us something about *which* program feature
+K_RTL might silently track: per-iter count, program length, branch
+density, or something else. It's one more test point, not a separator
+of those hypotheses individually.
 
 The decrement kernel: 11 instructions with a 4-insn loop body
 (`DUP; ZBRANCH exit; T-1; JUMP`). Half the countdown's per-iter
@@ -170,10 +179,8 @@ stakes out the next measurement — what does that buy?
 `Latency<L_MIN, L_MAX>` becomes a compile-time output, not a runtime
 input. For kernels whose memory path is fully deterministic —
 BRAM-resident, no SDRAM, no cache, no contention — the bounds are a
-Lean 4 theorem about (RTL invariants) × (program CFG), not a
-measurement on the hardware. The theorems live in
-`TimedCountdown.lean`, `TimedEcho.lean`, and `TimedDecrement.lean`;
-they typecheck on core Lean 4.28, no Mathlib, seconds to verify.
+machine-checked Lean 4 theorem about (RTL invariants) × (program CFG),
+not a measurement on the hardware.
 
 This doesn't replace runtime refinement — the two techniques apply to
 different regimes. Consider the payoff-ratio frame:
@@ -232,16 +239,16 @@ which regime a kernel sits in.
 ## What survives the silicon
 
 Two kernels cycle-exact against silicon, including seeds outside the
-declared domain. A third with half the per-iter count predicted,
-waiting for hardware to confirm or falsify. A pipeline-startup
-constant that held across the two measured kernels and across the
-ingress-to-halt boundary they share.
+declared domain. A third kernel with half the per-iter count
+predicted, waiting for hardware to confirm or falsify. A structurally
+derived `K_RTL = 1` that so far matches every measured case on this
+ingress-to-halt harness.
 `Latency<T, L_MIN, L_MAX>` goes from "type the runtime filled in after
 observation" to "type the RTL and the program filled in before the
 bitstream booted."
 
-The envelope before the silicon. For two kernels so far, the RTL
-already knew.
+The envelope before the silicon. For this harness, with these
+kernels, the RTL already knew.
 
 ---
 
