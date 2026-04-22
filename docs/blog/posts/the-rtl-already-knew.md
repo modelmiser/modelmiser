@@ -186,10 +186,10 @@ density, or something else.
 One caveat carries forward from the echo section: the decrement
 shares the same ingress boundary as the other two. The third kernel
 can't separate an ingress-level constant from a pipeline-wide
-constant any better than the first two could. What it *does* stress
-is load-sensitivity across a non-trivial program variation — a
-different question than ingress-vs-pipeline composition, and one the
-earlier pair couldn't ask.
+constant any better than the first two could. What it *will* stress
+once silicon runs it is load-sensitivity across a non-trivial
+program variation — a different question than ingress-vs-pipeline
+composition, and one the earlier pair couldn't ask.
 
 ## What derivation buys you
 
