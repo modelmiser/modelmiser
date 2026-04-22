@@ -1,7 +1,7 @@
 ---
 date: 2026-04-21
 categories:
-  - sol
+  - Sol
   - warp-core
 ---
 
