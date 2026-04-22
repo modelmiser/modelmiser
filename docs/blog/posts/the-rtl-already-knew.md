@@ -248,14 +248,14 @@ picture, the extraction formula needs a term for memory-access
 variance, and the formula stops being an equation.
 
 The planned SDRAM-touching kernel is where we expect extraction to
-disagree with empirical measurement. A falsifiable prediction:
-extraction predicts `L = insns + K_RTL`, hardware measures
-`L + Σ row_crossings · t_activate + refresh_noise`, where
-`t_activate` is the per-row-activate cost (a function of tRCD plus
-bank-conflict stalls) and `refresh_noise` is a time-dependent term
-set by the controller's tREFI rate. The first term is the one the
-extraction model would need to incorporate; the second is orthogonal
-to access patterns and would appear as bounded jitter.
+disagree with empirical measurement. Without running it, the shape
+of the delta is speculation, but the plausible contributors are
+separable by signature: per-row-activate costs would scale with
+row-crossing count, bank conflicts would show pattern-dependence,
+and refresh events would introduce bounded time-dependent jitter.
+When the measurements come in, the task will be to decompose the
+observed delta into those contributors — which is the work of
+extending the extraction model, not just replacing it.
 
 That's the point where extraction stops being an equation and starts
 being a lower bound on a distribution. Runtime refinement earns its
@@ -268,12 +268,12 @@ which regime a kernel sits in.
 
 `Latency<T, L_MIN, L_MAX>` goes from "type the runtime filled in after
 observation" to "type the RTL and the program filled in before the
-bitstream booted." Downstream, a consumer that takes a `Timed<T, L_MIN,
-L_MAX>` gets the same contract whether the bounds came from a static
-extractor or from a cycle-counter watching silicon. The difference is
-in when the contract is available: the extractor offers it at
-compile time, which means specialization arms that depend on the
-bound can be monomorphized before the bitstream is even emitted.
+bitstream booted." A consumer that takes a `Timed<T, L_MIN, L_MAX>`
+sees the same contract either way; the only difference is *when* the
+contract is available. Extraction offers it at compile time. What a
+downstream pipeline does with that earlier availability — whether it
+specializes on the bound, or just trusts it — is a separate
+conversation.
 
 The envelope before the silicon. For this harness, with these
 kernels, the RTL already knew.
