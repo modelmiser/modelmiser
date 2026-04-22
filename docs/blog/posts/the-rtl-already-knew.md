@@ -62,9 +62,13 @@ instructions retired and cycles counted by the envelope. Derived
 structurally from `super_j1_mailbox.v` + `latency_envelope.v`, it
 encodes one cycle of IMEM read latency between `req_fire` asserting
 and the first instruction becoming observable. The equation
-`L = insns + K_RTL` is only that simple when the pipeline doesn't
-stall mid-execution; for the J1's single-cycle ALU, branch, and
-IO-port access instructions, it doesn't. So `K_RTL = 1`, and:
+`L = insns + K_RTL` is only that simple under a handful of
+assumptions: no pipeline stalls mid-execution (the J1's single-cycle
+ALU, branch, and IO-port access instructions don't introduce any);
+no interrupts or exceptions (the J1 mailbox doesn't implement any —
+it's a request/response endpoint, not a preemptable core); no
+contention from a second bus master (single-master assumption, no
+DMA). Under those conditions, `K_RTL = 1`, and:
 
 ```
 L(countdown, seed) = (15 + 8·seed) + 1 = 16 + 8·seed
@@ -144,13 +148,30 @@ K_RTL might silently track: per-iter count, program length, branch
 density, or something else. It's one more test point, not a separator
 of those hypotheses individually.
 
-The decrement kernel: 11 instructions with a 4-insn loop body
-(`DUP; ZBRANCH exit; T-1; JUMP`). Half the countdown's per-iter
-count, using only opcodes the J1 ISA already models — no new decoder
-cases, no new `T_mux` selectors. The phase breakdown mirrors the
-countdown's: prologue 2, full iter 4·seed, final iter 2, exit path 5.
-Total `9 + 4·seed`, so extraction under `K_RTL = 1` predicts
-`L(seed) = 10 + 4·seed`, envelope `Latency<10, 50>`.
+The decrement kernel: 11 instructions, with a 4-insn loop body at
+the core. Half the countdown's per-iter count, using only opcodes
+the J1 ISA already models — no new decoder cases, no new `T_mux`
+selectors.
+
+```
+PC 0: LIT 0x10           push read address
+PC 1: io@T               T := io[0x10] = seed (initial counter)
+PC 2: DUP                duplicate counter  ← loop top
+PC 3: ZBRANCH PC=6       if counter == 0, branch to exit
+PC 4: T-1                counter := counter - 1
+PC 5: JUMP PC=2          loop back to PC 2
+PC 6: LIT 0x20           exit path begins
+PC 7: T N->io[T] d-1     io[0x20] := 0
+PC 8: LIT 0
+PC 9: LIT 0xFF
+PC 10: T N->io[T] d-1    io[0xFF] := 0 → halt
+```
+
+Phase breakdown mirrors the countdown's: prologue 2 (PC 0-1), full
+iter 4·seed (PC 2-5), final iter 2 (PC 2-3, with the ZBRANCH taken),
+exit path 5 (PC 6-10). Total `9 + 4·seed` predicted under
+`K_RTL = 1`, giving `L(seed) = 10 + 4·seed` and envelope
+`Latency<10, 50>`.
 
 This is a prediction, not a measurement. The decrement kernel hasn't
 run on silicon — the prediction is just the extraction formula fed a
@@ -161,6 +182,14 @@ other than `10 + 4·seed`, the "K_RTL is load-independent on this
 pipeline" claim is wrong, and the nature of the delta tells us
 whether the dependency is on per-iter count, program length, branch
 density, or something else.
+
+One caveat carries forward from the echo section: the decrement
+shares the same ingress boundary as the other two. The third kernel
+can't separate an ingress-level constant from a pipeline-wide
+constant any better than the first two could. What it *does* stress
+is load-sensitivity across a non-trivial program variation — a
+different question than ingress-vs-pipeline composition, and one the
+earlier pair couldn't ask.
 
 ## What derivation buys you
 
@@ -198,12 +227,17 @@ runtime observation adds nothing that `Latency<8, 8>` didn't already
 declare.
 
 Decrement at 80% is nearly indistinguishable from countdown's 83%
-despite half the absolute cycle reach. Two data points on the
-interval side is a thin sample, but the pattern is at least
-consistent with a shape-set rather than magnitude-set payoff — the
-`L_MIN/L_MAX` ratio predicts refinement's value, not the absolute
-cycle count. A stronger version of this claim needs a fourth kernel
-at a third magnitude.
+despite half the absolute cycle reach. Part of the "shape-set"
+claim is trivially true by construction: the ratio
+`(L_MAX - L_MIN) / L_MAX` is scale-invariant in magnitude whenever
+shape is held constant — that's algebra, not data. What the two
+data points *do* suggest, modulo a thin sample, is that real kernels
+with similar `L_MIN/L_MAX` shapes produce similar payoff ratios
+regardless of their absolute cycle counts. A stronger version of the
+claim needs a fourth kernel with a different shape but a similar
+magnitude to the decrement — that would separate "ratio holds when
+shape is held" (algebraic) from "ratio holds across real programs"
+(empirical).
 
 ## Where the extraction breaks
 
@@ -234,7 +268,12 @@ which regime a kernel sits in.
 
 `Latency<T, L_MIN, L_MAX>` goes from "type the runtime filled in after
 observation" to "type the RTL and the program filled in before the
-bitstream booted."
+bitstream booted." Downstream, a consumer that takes a `Timed<T, L_MIN,
+L_MAX>` gets the same contract whether the bounds came from a static
+extractor or from a cycle-counter watching silicon. The difference is
+in when the contract is available: the extractor offers it at
+compile time, which means specialization arms that depend on the
+bound can be monomorphized before the bitstream is even emitted.
 
 The envelope before the silicon. For this harness, with these
 kernels, the RTL already knew.
