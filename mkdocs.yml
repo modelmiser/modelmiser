@@ -45,6 +45,7 @@ plugins:
         - crossdomain
         - warp-core
         - warp-types
+        - quorum-types
         - Sol
         - mm-dream
       draft_if_future_date: false
@@ -103,3 +104,4 @@ nav:
   - Research:
     - warp-core: research/warp-core.md
     - warp-types: research/warp-types.md
+    - quorum-types: research/quorum-types.md
