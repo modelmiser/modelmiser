@@ -14,3 +14,4 @@
 | Repo | Description |
 |------|-------------|
 | [warp-types](https://github.com/modelmiser/warp-types) | Linear typestate for GPU warp divergence — compile-time prevention of shuffle-from-inactive-lane bugs |
+| [quorum-types](https://github.com/modelmiser/quorum-types) | Distributed-systems generalization of warp-types — type-level epochs make split-brain unrepresentable at compile time |
