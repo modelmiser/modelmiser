@@ -38,7 +38,7 @@ The signal mux (~30 LUTs) followed the same pattern. The raw plan included a con
 
 Net savings from these three eliminations: ~160 LUTs. The diagnostic peripheral set costs ~985 LUT gross but ~825 LUT net. Section 8 of the spec accounts for this explicitly, not as an afterthought.
 
-This is the same principle behind [composing from the constraint](../04/compose-from-the-bass.md) rather than optimizing toward it, applied at the system architecture level. The VP layer boundary — RTL is mechanism, Forth is policy — is the binding constraint. You don't write 62 registers and then figure out how to fit them into an architecture. You define the architecture and the registers fall out as consequences of what each peripheral needs to observe.
+This is the same principle behind [composing from the constraint](compose-from-the-bass.md) rather than optimizing toward it, applied at the system architecture level. The VP layer boundary — RTL is mechanism, Forth is policy — is the binding constraint. You don't write 62 registers and then figure out how to fit them into an architecture. You define the architecture and the registers fall out as consequences of what each peripheral needs to observe.
 
 ## The GDB RSP rejection
 
