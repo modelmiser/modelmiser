@@ -30,14 +30,19 @@ and demands a quorum as evidence, so a committed value is unforgeable and
 extends to *merging* two committed values that disagree — evidence-gated on
 the merge function's property-checked semilattice laws (sampled evidence, not
 proof) — and the merged result re-enters the lattice at the bottom: a merge
-is a new proposal, not a decision.
+is a new proposal, not a decision. The final rung changes the fault model
+itself: when nodes can *lie*, crash evidence becomes a different type, not a
+bigger number — a masking quorum (`n ≥ 4f+1`, after Malkhi–Reiter; the famous
+`3f+1` assumes signed data) whose certificate will not unify with the crash
+one, and whose every guarantee is conditional on an operator-declared fault
+budget no type can check.
 
 It is a research feasibility study, not a consensus library: no transport layer,
 the formal model is bounded, and the property tests cover small domains.
 
 ## Blog posts
 
-<!-- blog-posts:quorum-types:5 -->
+<!-- blog-posts:quorum-types:6 -->
 
 ## Links
 
