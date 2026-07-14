@@ -3,10 +3,13 @@ __pycache__/
 .venv/
 venv/
 INSIGHTS.md
+INSIGHTS/
 DEVLOG.md
+DEVLOG/
 TODO.md
 AUTHORING.md
 editorial_voice.md
 site/
 .vercel
+.env
 .env*.local
