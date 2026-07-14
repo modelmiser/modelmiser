@@ -10,7 +10,7 @@ A reconfigurable quorum system has two safety mechanisms that look redundant. Th
 
 <!-- more -->
 
-This is the last of three posts on quorum-types, a feasibility study that asks whether the compile-time safety of [warp-types](what-the-type-erases-to.md) survives the move from a GPU warp to a distributed system. The first, [Split-Brain, Unrepresentable](split-brain-unrepresentable.md), lifted a configuration epoch into the type so that merging two generations' quorums fails to compile — and then showed a bounded model proving that compile-time guard is necessary but not sufficient. The second, [Disjoint Becomes Intersecting](disjoint-becomes-intersecting.md), flipped the set relation: a warp partitions its lanes into disjoint complements, but a failure-tolerant cluster forms quorums that must *overlap*. This post composes the two halves and finds the seam between them.
+This is the third post on quorum-types, a feasibility study that asks whether the compile-time safety of [warp-types](what-the-type-erases-to.md) survives the move from a GPU warp to a distributed system. The first, [Split-Brain, Unrepresentable](split-brain-unrepresentable.md), lifted a configuration epoch into the type so that merging two generations' quorums fails to compile — and then showed a bounded model proving that compile-time guard is necessary but not sufficient. The second, [Disjoint Becomes Intersecting](disjoint-becomes-intersecting.md), flipped the set relation: a warp partitions its lanes into disjoint complements, but a failure-tolerant cluster forms quorums that must *overlap*. This post composes the two halves and finds the seam between them.
 
 ## Two mechanisms, one suspicion
 

@@ -21,9 +21,12 @@ the type makes cross-epoch `merge` a compile error (split-brain unrepresentable
 structurally); a bounded TLA+ model shows that guarantee is *necessary but not
 sufficient* because split-brain is temporal; a runtime lease supplies the missing
 guard; dynamic membership generalizes by *flipping the set relation* (disjoint
-complement becomes intersecting quorum); and composing the two shows they
+complement becomes intersecting quorum); composing the two shows they
 partition safety by regime — structural within a configuration, temporal across
-one.
+one; and finally the same discipline turns on the *values*: a consistency
+lattice (`Local` → `At` → `Agreed`) where the only move up consumes a proposal
+and demands a quorum as evidence, so a committed value is unforgeable and
+"act only on decided values" is a compile error.
 
 It is a research feasibility study, not a consensus library: no transport layer,
 the formal model is bounded, and the property tests cover small domains.
