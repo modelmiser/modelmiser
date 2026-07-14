@@ -16,6 +16,8 @@ A type can make the bad state impossible to write down and still fail to make it
 
 That last sentence is the whole reason to write quorum-types. A GPU warp is a *degenerate best case* of a distributed system: the one where nothing goes wrong. `warp-types` is therefore already an ownership/session type system specialized to the friendliest cluster in existence. The question this repo asks is narrow and mechanical — what has to change when you remove the assumption that membership is stable and holders never die? Where does the structural guarantee keep working, and where does it quietly stop?
 
+That question has two siblings in the back catalogue, each pushing the same erase-to-nothing structural discipline in a different direction. [Intervals Collapse to Points](intervals-collapse-to-points.md) turned it on *timing*, where deterministic hardware collapses a timed session type's intervals to single points; [The Proof That Caught a Wire](the-proof-that-caught-a-wire.md) turned it on *proof*, where a structural check surfaced a real channel-direction bug. Distribution is the third direction, and the least forgiving of the three.
+
 The starting move is the obvious generalization. A distributed system reconfigures: it changes its membership set and stamps each configuration with an **epoch**, a monotonically increasing generation number. The failure everyone fears is *split-brain* — two nodes from different epochs both believing they are the leader, both serving writes, both correct according to their own view. So lift the epoch into the type. Make a membership token carry its epoch as a `const` generic, and make the recombine operation require that both halves agree on it.
 
 ## The compile error that feels like a proof
