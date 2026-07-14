@@ -11,5 +11,4 @@ AUTHORING.md
 editorial_voice.md
 site/
 .vercel
-.env
-.env*.local
+.env*
