@@ -26,14 +26,18 @@ partition safety by regime — structural within a configuration, temporal acros
 one; and finally the same discipline turns on the *values*: a consistency
 lattice (`Local` → `At` → `Agreed`) where the only move up consumes a proposal
 and demands a quorum as evidence, so a committed value is unforgeable and
-"act only on decided values" is a compile error.
+"act only on decided values" is a compile error. The same discipline then
+extends to *merging* two committed values that disagree — evidence-gated on
+the merge function's property-checked semilattice laws (sampled evidence, not
+proof) — and the merged result re-enters the lattice at the bottom: a merge
+is a new proposal, not a decision.
 
 It is a research feasibility study, not a consensus library: no transport layer,
 the formal model is bounded, and the property tests cover small domains.
 
 ## Blog posts
 
-<!-- blog-posts:quorum-types:4 -->
+<!-- blog-posts:quorum-types:5 -->
 
 ## Links
 
