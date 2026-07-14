@@ -33,7 +33,7 @@ the formal model is bounded, and the property tests cover small domains.
 
 ## Blog posts
 
-<!-- blog-posts:quorum-types -->
+<!-- blog-posts:quorum-types:4 -->
 
 ## Links
 

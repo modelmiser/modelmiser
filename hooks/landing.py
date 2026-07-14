@@ -126,7 +126,7 @@ def _build_category_list(posts, posts_rel):
     return "\n".join(lines)
 
 
-CATEGORY_RE = re.compile(r"<!-- blog-posts:(\S+) -->")
+CATEGORY_RE = re.compile(r"<!-- blog-posts:([A-Za-z0-9_-]+)(?::(\d+))? -->")
 CATEGORY_LIMIT = 3
 
 
@@ -172,7 +172,8 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
 
         for match in CATEGORY_RE.finditer(markdown):
             category = match.group(1)
-            filtered = [p for p in posts if category in p["categories"]][:CATEGORY_LIMIT]
+            limit = int(match.group(2)) if match.group(2) else CATEGORY_LIMIT
+            filtered = [p for p in posts if category in p["categories"]][:limit]
             markdown = markdown.replace(match.group(0), _build_category_list(filtered, posts_rel))
 
     return markdown
