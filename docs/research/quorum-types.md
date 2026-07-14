@@ -30,19 +30,27 @@ and demands a quorum as evidence, so a committed value is unforgeable and
 extends to *merging* two committed values that disagree — evidence-gated on
 the merge function's property-checked semilattice laws (sampled evidence, not
 proof) — and the merged result re-enters the lattice at the bottom: a merge
-is a new proposal, not a decision. The final rung changes the fault model
+is a new proposal, not a decision. The next rung changes the fault model
 itself: when nodes can *lie*, crash evidence becomes a different type, not a
 bigger number — a masking quorum (`n ≥ 4f+1`, after Malkhi–Reiter; the famous
 `3f+1` assumes signed data) whose certificate will not unify with the crash
 one, and whose every guarantee is conditional on an operator-declared fault
-budget no type can check.
+budget no type can check. The final rung takes the discipline to a simulated
+*network*: a const-generic epoch cannot be lifted from runtime bytes, so a
+deterministic three-host simulation (turmoil) replays the TLA+ counterexample
+as real partition events and locates what survives the wire — the discipline
+intact per process, a runtime epoch whose only power is *selecting* among
+compiled monomorphizations, and all trust concentrated in one named
+deserialization boundary, the fourth root in the arc's refrain that types
+verify chains while operators choose roots.
 
-It is a research feasibility study, not a consensus library: no transport layer,
+It is a research feasibility study, not a consensus library: the library has no
+transport layer (the network simulation is a test harness over a toy protocol),
 the formal model is bounded, and the property tests cover small domains.
 
 ## Blog posts
 
-<!-- blog-posts:quorum-types:6 -->
+<!-- blog-posts:quorum-types:7 -->
 
 ## Links
 
