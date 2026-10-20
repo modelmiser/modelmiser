@@ -172,6 +172,48 @@ open).** Neither
 "meaning lives outside the word" nor "the names carry most of it" survives the split. Whether either aid was
 necessary, and whether people read the same way, is untested.
 
+> **Added 2026-10-19, the evening of posting, from a registered follow-up (L3-P) whose decision rules were fixed
+> before its data.** The registration was written after this post, the same day, with the post's claims as its stated
+> prior. It tied the post to one result only: withdraw this section's claim if a wrong body did as well as the real
+> one or better, add a caveat if that result was inconclusive, give the reason if it could not be drawn, nothing if
+> the real body won. It won, so nothing above is withdrawn; this note is voluntary. Three control arms, on the same
+> 94 words whose callee has a body, the same two readers, one run of 1,128 items; one of the 2,256 reader sessions
+> was excluded for tool use, and six were re-run once after a provider usage limit. The percentages are this run's;
+> the 94-word table above is the first run's, and the three conditions the two runs share agree within 1.4 points.
+>
+> - **A wrong body.** Each callee's body was replaced by another callee's body of the closest available length
+>   (within one token in 90 of 121 cases), shown under the real callee's name and stack comment. With the real body,
+>   71% of value defects were found; with the wrong body, 47%, not measurably above the stack-comment line's 44%
+>   (0.15 ± 0.19 on the log-odds scale; a gain from merely having code to read, up to about the smallest effect the
+>   design counts or a little more, is not ruled out, and this design could not show equivalence). The real body's
+>   lead over the wrong one, 1.06 ± 0.22 (0.62 to 1.49), is the registered result, SUPPORTED: most of the body's gain
+>   came from what the body says. The wrong body did make the readers claim a defect in half of the clean items (14%
+>   under the real body). Despite those extra claims, detection under the wrong body was not measurably above the
+>   stack-comment line (47% against 44%), and a check registered for exactly this case passed.
+> - **The original names with nothing about the callees.** With the callees' stack comments removed ("none is
+>   available", so this packet is also the shortest), detection was 59% against 69% with them: 0.43 ± 0.16, just over
+>   the smallest effect the design counts (0.41), so SUPPORTED, at the margin; the interval, 0.12 to 0.74, reaches
+>   well below that threshold. The result rests on one reader. Grok found 77% either way. GPT fell from 61% to 41% and
+>   claimed a defect in 71% of clean items when told nothing, which may be a property of that reader or of the prompt,
+>   whose list of callee information was empty; the registration did not ask. Its rule for dropping a reader counted
+>   this arm and kept GPT (clean-item claim rate 0.219 over the five non-wrong-body conditions, limit 0.25); the rule
+>   did not anticipate a reader claiming defects almost everywhere in one arm. So in these 94 words, the names effect
+>   includes the callees' stack comments for one of the two readers, unless GPT's drop is an artefact of the empty
+>   list.
+> - **Stack comments reduced to positions.** With neutral names and every stack comment, the word's own included,
+>   reduced to the form `( x1 x2 -- x3 )`, detection was 16% against 44% with the comments as written: 1.46 ± 0.26
+>   (0.95 to 1.98), SUPPORTED. The "names replaced" baseline (43% in the 94-word table above, 44% in this run) was not
+>   blank: 27 of its 44 points went when the comments were reduced to positions. So the sentence above, that a stack
+>   comment says nothing about what the values mean, understates what these readers took from them: the reduction
+>   removed the comments' words, the word's own comment, and their dataflow (`( a b -- b a )` becomes
+>   `( x1 x2 -- x3 x4 )`), and which part did the work is not separated. This does not change the comparison of the
+>   two gains above, which share that baseline, but it changes where both start: against positions only, the original
+>   names with stack comments stand at 69% against 16%, a figure that bundles the names with the comments.
+>
+> The clean-item claim rates, the per-reader figures, the wrong-body-against-comments estimate, the 69%-against-16%
+> comparison and the repeat are descriptive, with no registered verdict. On the three repeated conditions the readers
+> gave the same claim-or-no-claim answer on 92.5% of items one day later.
+
 ## The instruments, briefly
 
 The tooling built the materials and the GreenArrays models; the reader results do not depend on its agreement
@@ -256,7 +298,12 @@ reader could catch it, and whether readers do was not established (L2 was not dr
 is four numbers and a split: in small Forth words whose stack effect does not depend on the data, two LLM readers
 found seeded value defects in 29% of items with neutral names and callee stack comments, 71% with the original
 names, 58% with the callees' source, and 86% with both; where a callee had a body, the names' clear lead over the
-body was absent, and which gain is larger there is open. Whether either was necessary is untested. For obligations
+body was absent, and which gain is larger there is open. Whether either was necessary is untested. A follow-up
+(the note in the names section) found that, in the 94 words whose callee has a body, most of the body's gain came
+from what the body says; that with the original names, removing the callees' stack comments cost detection
+(0.43 ± 0.16, at the margin, carried by one of the two readers); and that the 43–44% baseline both gains are
+measured from already carried 27 points that were lost when every stack comment was reduced to positions. For
+obligations
 that cross components, in both cases studied the obligation was handled by an ordering, a declaration, or a
 redesign that removed it.
 
